@@ -1,0 +1,14 @@
+/* order page in admin */
+ul#order-list {
+    padding: 0;
+
+}
+ul#order-list li {
+    list-style-type: none;
+    background: #417690;
+    padding: 5px;
+    margin-bottom: 3px;
+    color: #fff;
+    width: 100%;
+    cursor: move;
+}
