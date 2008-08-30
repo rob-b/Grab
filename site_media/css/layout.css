@@ -1,171 +1,23 @@
 body {
-    background: #555;
     background: #eeecde;
-    background: url(/assets/ui/header-back.gif) #eeecde top left repeat-x;
-    padding-top: 20px;
 }
-#top {
-    background: url(/assets/ui/top.png) top left no-repeat;
-    margin: auto;
-    width: 1008px;
-    height: 70px;
+#header {
+    background: #333;
+    color: #eeecde;
+    font-family: Palatino,"Book Antiqua","URW Palladio L",serif;
+    margin-bottom: 20px;
 }
-#outer {
-    background: url(/assets/ui/back.png) 0px 0px repeat-y ;
-    margin: auto;
-    width: 1008px;
-}
-#main {
-    background: #fff;
-    /* margin-left: 0; */
-
-}
-
-/* header */
-div#header {
-    color: #4d8040;
-    height:100px;
-    position: relative;
-    margin-bottom: 30px;
-}
-
 #header h1 {
-    font-weight: normal;
-    font-family: "Hoefler Text", Palatino, Garamond, "Palatino Linotype", serif;
-    font-size: 45px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-}
-#header h1 a {
-    color: #4d8040;
-    text-decoration: none;
-}
-#header h1 a span {
-    color: #bd3924;
+    font-size: 46px;
 }
 
-
-
-h2 {
-    color: #444;
-    font-family: "Century Schoolbook", "Baskerville", "Clarendon Std","Century Old Style Std", Georgia, Serif;
-    font-weight: normal;
+div#feed-list h2 {
+    color: #618fdc;
     margin-bottom: 10px;
 }
-
-/* top nav */
-div#top-nav {
-    font-family: Baskerville, Times, "Times New Roman", serif;
+div#feed-list h3 {
+    margin-bottom: 0;
 }
-div#top-nav ul {
-    margin: 0;
-    height: 100%;
-    float: left;
-}
-
-div#top-nav ul li {
-    margin: 0;
-    list-style-type: none;
-    display: inline;
-}
-div#top-nav ul li a {
-    color: #444;
-    /* background: #ddd; */
-    text-decoration: none;
-    height: 100%;
-    float: left;
-    margin-right: 5px;
-    padding: 3px;
-    padding-bottom: 0;
-    padding-top: 0;
-    text-transform: uppercase;
-}
-div#top-nav ul li a:hover,
-div#top-nav ul li a.active {
-    background: #fff;
-    background: #eeecde;
-}
-
-/* side nav */
-div#left-nav {
-    margin-top: 45px;
-}
-
-div#left-nav div.nav-section {
-    padding: 0px;
-}
-div#left-nav h2 {
-}
-
-/* featured project */
-#featured-project {
-    margin-bottom: 40px;
-}
-#featured-project h2{
-    font-size: 33px;
-    color: #bd3924;
-    height: 40px;
-    padding-bottom: 4px;
-    background: url(/assets/ui/dot.gif) repeat-x bottom;
-}
-
-#featured-project h2 a {
-    color: #bd3924;
-    text-decoration: none;
-}
-
-/* home page project items */
-.projects div {
+div#feed-list div {
     margin-bottom: 20px;
-}
-.projects div h3 {
-    display: block;
-    font-family: Tahoma;
-    font-weight:normal;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
-}
-.projects div h3 a {
-    color: #444;
-    /* text-decoration: none; */
-}
-.projects div h3 a:hover {
-    color: #aaa;
-}
-.projects div p.summary {
-    height: 95px;
-}
-.projects div a.project-image {
-    /* height: 220px; */
-    /* display: block; */
-}
-
-/* style the images for both featured and regular projects */
-.projects div img,
-#featured-project img {
-    border: 1px solid #ddd;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-.projects div a:hover img,
-#featured-project a:hover img {
-    border-color: #999;
-}
-
-/* slideshow */
-.pics {
-    width:   500px;
-    height:  300px;
-    padding: 0;
-    margin:  0;
-}
-
-.pics img {
-    /* padding: 15px; */
-    /* border:  1px solid #ccc; */
-    /* background-color: #eee; */
-    top:  0;
-    left: 0
-    margin: 0;
 }

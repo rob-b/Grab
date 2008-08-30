@@ -12,6 +12,18 @@
         <title>GRAB: {% block title %}{% endblock %}</title>
     </head>
     <body>
-        <h1>Hello world</h1>
+        <div class="container_12">
+            <div class="grid_12" id="header">
+                <h1>Grab</h1>
+            </div>
+            <div class="grid_4" id="feed-list">
+                {% block feed_list %}
+                {% endblock %}
+            </div>
+            <div class="grid_8">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
     </body>
 </html>

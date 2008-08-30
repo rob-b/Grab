@@ -1,5 +1,8 @@
-from grab.utils.helpers import rendered
+from utils.helpers import rendered
+from feeds.models import Feed
 
 @rendered
 def feed_list(request):
-    return 'grab/feed_list.html', {}
+
+    feeds = Feed.objects.all()
+    return 'grab/feed_list.html', {'feeds': feeds}

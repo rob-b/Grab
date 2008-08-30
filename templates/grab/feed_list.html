@@ -1,1 +1,15 @@
 {% extends "base.html" %}
+
+{% block content %}
+{% endblock %}
+
+{% block feed_list %}
+
+<h2>Feeds</h2>
+{% for feed in feeds %}
+    <div>
+        <h3>{{ feed.name }}</h3>
+        <a href="{{ feed.link}}">{{ feed.title }}</a>
+    </div>
+{% endfor %}
+{% endblock %}

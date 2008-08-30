@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     # Uncomment the next line for to enable the admin:
     (r'^admin/(.*)', admin.site.root),
 
-    (r'', include('feeds.urls')),
+    (r'^$', include('feeds.urls')),
 )
 
 from django.conf import settings
