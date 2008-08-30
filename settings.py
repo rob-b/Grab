@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # 'feedjack',
     'feeds',
+    'django_extensions',
 )
 
 CACHE_BACKEND = 'dummy:///'
