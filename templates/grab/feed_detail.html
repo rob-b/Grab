@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="module">
+    <h2>{{ feed.name }}</h2>
+    <h3>Last modified: {{ feed.last_modified|date:"P F jS" }}</h3>
+
+    <ul>
+        {% for post in posts %}
+        <li>{{ post }}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
 
 {% block feed_list %}
