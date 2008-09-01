@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
+from feeds.views import feed_list
+
 urlpatterns = patterns('',
     # Example:
     # (r'^grab/', include('grab.foo.urls')),
@@ -14,7 +16,8 @@ urlpatterns = patterns('',
     # Uncomment the next line for to enable the admin:
     (r'^admin/(.*)', admin.site.root),
 
-    (r'^$', include('feeds.urls')),
+    # url(r'^$', feed_list, name="home"),
+    (r'', include('feeds.urls')),
 )
 
 from django.conf import settings
