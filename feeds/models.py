@@ -53,6 +53,7 @@ class Feed(models.Model):
             self.title = item.feed.title
             self.link = item.feed.link
             self.etag = item.etag
+            self.tagline = item.tagline
             if hasattr(item, 'modified'):
                 modified = list(item.modified[0:8]) + [-1]
                 modified = datetime.fromtimestamp(time.mktime(modified))
