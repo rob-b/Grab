@@ -56,12 +56,22 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.load_template_source',
 )
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+)
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'pagination.middleware.PaginationMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'grab.urls'
@@ -71,6 +81,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_PATH, 'templates'),
+    os.path.join(PROJECT_PATH, 'templates/default'),
 )
 
 INSTALLED_APPS = (
@@ -81,7 +92,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # 'feedjack',
     'feeds',
+    'pagination',
     'django_extensions',
+    'south',
+    # 'debug_toolbar',
 )
 
 CACHE_BACKEND = 'dummy:///'
+INTERNAL_IPS = ('127.0.0.1',)
