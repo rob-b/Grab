@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load pagination_tags %}
+
+{% block content %}
+<div class="module">
+
+    {% block list_title %}
+    <h2>{{ feed.name }}</h2>
+    {% endblock %}
+
+    <ul id="post-list">
+        {% autopaginate posts %}
+        {% for post in posts %}
+
+        {% if post.read %}
+        <li class="read">
+        {% else %}
+        <li>
+        {% endif %}
+
+        <div class="item-head clearfix">
+            <p class="meta clearfix">
+            {{ post.updated|date:"d.M"|upper }}
+            </p>
+        <h3>
+        <a href="{{ post.link }}">
+            {{ post }}
+        </a>
+        </h3>
+        </div>
+
+        <p>
+        {{ post.content|safe }}
+        </p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% paginate %}
+
+</div>
+{% endblock %}
+
+{% block feed_list %}
+
+<h2>Feeds</h2>
+<a href="{% url feed_add %}">
+    Add feed
+</a>
+{% for feed in feeds %}
+    <div class="{% cycle "odd" "even" %}">
+        <h3>
+            <a href="{{ feed.get_absolute_url }}">
+                {{ feed.name }}
+            </a>
+        </h3>
+        <p>
+            <a href="{{ feed.link}}">{{ feed.link }}</a>
+        </p>
+    </div>
+{% endfor %}
+{% endblock %}
