@@ -1,4 +1,4 @@
-from utils.helpers import rendered
+from hostel.decorators import rendered
 from feeds.models import Feed, Post
 from feeds.tools import FeedProcessor
 
