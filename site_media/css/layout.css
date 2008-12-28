@@ -1,6 +1,18 @@
 body {
     background: #eeecde;
+    color: #333;
 }
+
+/* generic link styles */
+a:link,
+a:visited {
+    color: #555;
+}
+a:hover,
+a:active {
+    color: #333;
+}
+
 #header {
     background: #333;
     color: #eeecde;
@@ -10,9 +22,10 @@ body {
 #header h1 {
     font-size: 46px;
     color: #fff;
-    font-weight: bold;
+    font-weight: normal;
     letter-spacing: 3px;
     text-transform: uppercase;
+    margin-left: 10px;
 }
 #header h1 a {
     color: #fff;
@@ -21,18 +34,33 @@ body {
 
 .module h2,
 div#feed-list h2 {
-    color: #618fdc;
+    /* color: #618fdc; */
+    color: #333;
     margin-bottom: 5px;
     border-bottom: 2px solid;
     font-family: "Franklin Gothic Medium", "Arial Narrow Bold", Arial, sans-serif;
+    font-family: "Adobe Caslon Pro","Hoefler Text",Georgia,Garamond,Times,serif;
     letter-spacing: 1px;
+    font-weight: normal;
+    font-variant: small-caps;
 }
 div#feed-list h3 {
     margin-bottom: 0;
     font-family: "Lucida fax", Georgia, "Times New Roman", serif;
     color: #333;
-    /* background: #333; */
     padding: 2px;
+}
+div#feed-list h3 a {
+    text-decoration: none;
+}
+div#feed-list h3 a:link {
+    color: #555;
+}
+div#feed-list h3 a:visited {
+    color: #555;
+}
+div#feed-list h3 a:hover {
+    border-bottom: 2px solid;
 }
 div#feed-list div {
     margin-bottom: 20px;
@@ -44,8 +72,110 @@ div#feed-list div a {
 div#feed-list div p {
     padding: 3px 2px;
 }
-.module h3 {
+
+/* a list of posts belonging to a feed */
+
+/* links in a post item */
+ul#post-list a {
+    color: #0061de;
+    text-decoration: none;
+}
+
+/* the head of a feed item */
+.item-head {
+    margin-bottom: 20px;
+    /* line-height: 17px; */
+}
+.item-head h3 {
+    margin-bottom: 0;
+    border-bottom: 0 solid !important;
+    font-family: "Adobe Caslon Pro","Hoefler Text",Georgia,Garamond,Times,serif;
+}
+/* the link in the item-head */
+.item-head h3 a{
+    color: #555 !important;
+}
+.item-head p {
+    float: right;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+ul#post-list li {
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    padding: 5px 5px 5px 0;
+    padding: 5px;
+    background: #fff;
+    margin-bottom: 20px;
+    color: #888;
+}
+ul#post-list li.read {
+    border: 1px solid #cac9db;
+    background: #f7f6ef;
+}
+/* ul#post-list h3 {
+    border-bottom: 1px solid;
+}
+ul#post-list h3 a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+    font-size: 15px;
+}                                */
+
+
+
+.meta {
     color: #b9b8af;
     font-size: 13px;
     font-weight: normal;
+}
+.module {
+}
+
+
+div.pagination {
+    padding: 3px;
+    margin: 3px;
+    font-family:Tahoma,Helvetica,sans-serif;
+    font-size:.85em;
+}
+
+div.pagination a {
+    border: 1px solid #ccdbe4;
+    margin-right:3px;
+    padding:2px 8px;
+    background-position:bottom;
+    text-decoration: none;
+    color: #0061de;
+}
+div.pagination a:hover, div.pagination a:active {
+    border: 1px solid #2b55af;
+    background-image:none;
+    background-color:#3666d4;
+    color: #fff;
+}
+div.pagination span.current {
+    margin-right:3px;
+    padding:2px 6px;
+    font-weight: bold;
+    color: #000;
+}
+div.pagination span.disabled {
+    display:none;
+}
+div.pagination a.next{
+    border:2px solid #ccdbe4;
+    margin:0 0 0 10px;
+}
+div.pagination a.next:hover {
+    border:2px solid #2b55af;
+}
+div.pagination a.prev{
+    border:2px solid #ccdbe4;
+    margin:0 10px 0 0;
+}
+div.pagination a.prev:hover {
+    border:2px solid #2b55af;
 }
