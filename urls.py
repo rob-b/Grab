@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
 
     # url(r'^$', feed_list, name="home"),
-    (r'', include('feeds.urls')),
+    (r'feeds/', include('feeds.urls')),
 )
 
 from django.conf import settings
