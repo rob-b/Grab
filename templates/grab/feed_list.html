@@ -1,17 +1,7 @@
-{% extends "base.html" %}
+{% extends "grab/base.html" %}
 
-{% block content %}
-{% endblock %}
-
-{% block feed_list %}
-
-<h2>Feeds</h2>
-{% for feed in feeds %}
-    <div class="{% cycle "odd" "even" %}">
-        <h3>{{ feed.name }}</h3>
-        <p>
-            <a href="{{ feed.link}}">{{ feed.title }}</a>
-        </p>
-    </div>
-{% endfor %}
+{% block list_title %}
+<h2>
+    Latest Posts
+</h2>
 {% endblock %}
