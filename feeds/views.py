@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 @rendered
 def feed_list(request):
     posts = Post.objects.all()
-    return 'grab/feed_list.html', {'posts': posts}
+    return 'feeds/feed_list.html', {'posts': posts}
 
 @rendered
 def feed_detail(request, object_id, update=False):
@@ -26,8 +26,8 @@ def feed_detail(request, object_id, update=False):
         'posts': posts,
         'feed_status': feed_status,
     }
-    return 'grab/feed_detail.html', data
+    return 'feeds/feed_detail.html', data
 
 @rendered
 def feed_add(request):
-    return 'grab/feed_add.html', locals()
+    return 'feeds/feed_add.html', locals()

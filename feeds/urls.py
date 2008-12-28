@@ -6,7 +6,7 @@ from feeds.models import Feed
 
 feed_dict = {
     'queryset': Feed.objects.all(),
-    'template_name': 'grab/feed_detail.html',
+    'template_name': 'feeds/feed_detail.html',
     'template_object_name': 'feed',
 }
 
