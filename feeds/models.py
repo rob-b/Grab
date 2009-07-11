@@ -1,18 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from feeds.tools import FeedProcessor
-from tools import mtime
 from tools import populate_feed
-
 import feedparser
-from datetime import datetime
-import time
-
-def feed_creation(sender, **kwargs):
-    if kwargs.get('created'):
-        populate_feed(kwargs['instance'])
-models.signals.post_save.connect(feed_creation, sender=Feed)
 
 
 class Site(models.Model):
@@ -92,5 +82,8 @@ class Post(models.Model):
     def get_absolute_url(self):
         return self.link
 
-    # def save(self, *args, **kwargs):
-    #     pass
+# signals
+def feed_creation(sender, **kwargs):
+    if kwargs.get('created'):
+        populate_feed(kwargs['instance'])
+models.signals.post_save.connect(feed_creation, sender=Feed)
