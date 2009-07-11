@@ -1,7 +1,10 @@
+from django.db import models
 import feedparser
 from datetime import datetime
 import time
 import sys
+import shelve
+from feedcache import cache
 
 def mtime(timetuple):
     modified = list(timetuple[0:8]) + [-1]
@@ -10,7 +13,7 @@ def mtime(timetuple):
 def populate_feed(feed_obj):
 
     # this is not threadsafe and will likely break on a real server
-    storage = shelve.open('./feedcache/' + feed_obj.feed_url)
+    storage = shelve.open(feed_obj.name)
     fc = cache.Cache(storage)
     item = fc.fetch(feed_obj.feed_url)
     # item = feedparser.parse(feed_obj.feed_url)
@@ -29,6 +32,7 @@ def populate_feed(feed_obj):
         post.save()
 
 def create_post(entry):
+    from models import Post
     post = Post()
     for k, v in entry.items():
         try:
