@@ -1,3 +1,5 @@
+feedparser
+feedcache
 -e svn+http://django-command-extensions.googlecode.com/svn/trunk/#egg=django_extensions
 -e svn+http://typogrify.googlecode.com/svn/trunk/#egg=typogrify
 -e svn+http://django-pagination.googlecode.com/svn/trunk/#egg=pagination
