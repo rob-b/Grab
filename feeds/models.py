@@ -2,16 +2,17 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from feeds.tools import FeedProcessor
+from tools import mtime
+from tools import populate_feed
 
 import feedparser
 from datetime import datetime
 import time
 
 def feed_creation(sender, **kwargs):
-    if isinstance(kwargs['instance'], Feed) and kwargs['created']:
-        fp = FeedProcessor(Post)
-        fp.process_feed(kwargs['instance'])
-models.signals.post_save.connect(feed_creation)
+    if kwargs.get('created'):
+        populate_feed(kwargs['instance'])
+models.signals.post_save.connect(feed_creation, sender=Feed)
 
 
 class Site(models.Model):
@@ -62,22 +63,6 @@ class Feed(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.name,)
-
-    def save(self):
-        if not self.id or True:
-            item = feedparser.parse(self.feed_url)
-            self.title = item.feed.title
-            self.link = item.feed.link
-            self.etag = item.etag
-            self.tagline = item.feed.tagline
-            if hasattr(item, 'modified'):
-                modified = list(item.modified[0:8]) + [-1]
-                modified = datetime.fromtimestamp(time.mktime(modified))
-            else:
-                modified = None
-            self.updated = modified
-            self.last_checked = datetime.now()
-        super(self.__class__, self).save()
 
     @models.permalink
     def get_absolute_url(self):

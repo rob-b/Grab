@@ -4,17 +4,61 @@ import time
 import sys
 
 def mtime(timetuple):
-
     modified = list(timetuple[0:8]) + [-1]
     return datetime.fromtimestamp(time.mktime(modified))
 
+def populate_feed(feed_obj):
+
+    # this is not threadsafe and will likely break on a real server
+    storage = shelve.open('./feedcache/' + feed_obj.feed_url)
+    fc = cache.Cache(storage)
+    item = fc.fetch(feed_obj.feed_url)
+    # item = feedparser.parse(feed_obj.feed_url)
+    feed_obj.title = item.feed.title
+    feed_obj.link = item.feed.link
+    feed_obj.etag = item.etag
+    feed_obj.tagline = item.feed.tagline
+    try:
+        feed_obj.updated = mtime(item.modified)
+    except AttributeError:
+        feed_obj.updated = None
+    feed_obj.last_checked = datetime.now()
+    for entry in item.entries:
+        post = create_post(entry)
+        post.feed = feed_obj
+        post.save()
+
+def create_post(entry):
+    post = Post()
+    for k, v in entry.items():
+        try:
+            field = post._meta.get_field_by_name(k)[0]
+        except models.FieldDoesNotExist:
+            continue
+        if not isinstance(field, models.AutoField):
+            setattr(post, k, v)
+
+    # we cannot be sure of the entry.items order and so we have to setup the
+    # datefield handling after initial values have been set. feels unDRY
+    for k, v in entry.items():
+        if not k.endswith('_parsed'):
+            continue
+        name = k.replace('_parsed', '')
+        try:
+            field = post._meta.get_field_by_name(name)[0]
+        except models.FieldDoesNotExist:
+            continue
+        if hasattr(post, name) and isinstance(field, models.DateTimeField):
+            setattr(post, name, mtime(v))
+    return post
+
+# old, possibly useless code
 class FeedProcessor(object):
 
     def __init__(self, Post):
         self.Post = Post
 
     def process_feed(self, stored_feed):
-
         if not stored_feed.post_set.all():
             etag = modified = None
         else:
@@ -49,7 +93,7 @@ class FeedProcessor(object):
         guids = []
         for entry in feed.entries:
 
-            if entry.id:
+            if hasattr(entry, 'id') and entry.id:
                 guids.append(entry.id)
             elif entry.title:
                 guids.append(entry.title)
@@ -74,8 +118,12 @@ class FeedProcessor(object):
     def process_entry(self, feed, entry, postdict):
 
         link = entry.link if 'link' in entry else feed.link
-        item, created = self.Post.objects.get_or_create(link=link,
-                                                        defaults={'feed':feed})
+        try:
+            item, created = self.Post.objects.get_or_create(link=link,
+                                                            defaults={'feed':feed})
+        except Exception, e:
+            print link, feed
+            raise
         item.link = link
         item.title = entry.title if 'title' in entry else feed.link
         item.guid = entry.id if 'id' in entry else feed.link
