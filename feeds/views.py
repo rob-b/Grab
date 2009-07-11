@@ -1,6 +1,7 @@
 from hostel.decorators import rendered
 from feeds.models import Feed, Post
 from feeds.tools import FeedProcessor
+from feeds.forms import FeedForm
 
 from django.shortcuts import get_object_or_404
 
@@ -30,4 +31,11 @@ def feed_detail(request, object_id, update=False):
 
 @rendered
 def feed_add(request):
-    return 'feeds/feed_add.html', locals()
+
+    if request.method == 'POST':
+        form = FeedForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FeedForm()
+    return 'feeds/feed_add.html', {'form': form}
