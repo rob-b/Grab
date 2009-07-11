@@ -1,8 +1,7 @@
 # Django settings for grab project.
 import os
-from local import *
 
-PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0])
+PROJECT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -101,3 +100,8 @@ INSTALLED_APPS = (
 
 CACHE_BACKEND = 'dummy:///'
 INTERNAL_IPS = ('127.0.0.1',)
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
