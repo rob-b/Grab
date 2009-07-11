@@ -84,15 +84,13 @@ class Feed(models.Model):
         return ('feed_detail', str(self.id))
 
 class Post(models.Model):
-    feed = models.ForeignKey(Feed, verbose_name=_('feed'), null=False, blank=False)
+    feed = models.ForeignKey(Feed, verbose_name=_('feed'))
     title = models.CharField(_('title'), max_length=255)
     link = models.URLField(_('link'), )
+    summary = models.TextField(_('summary'), blank=True)
     content = models.TextField(_('content'), blank=True)
-    filtered_content = models.TextField(_('content'), blank=True)
-    guid = models.CharField(_('guid'), max_length=200, db_index=True)
     author = models.CharField(_('author'), max_length=50, blank=True)
     author_email = models.EmailField(_('author email'), blank=True)
-    comments = models.URLField(_('comments'), blank=True)
     created = models.DateField(_('date created'), auto_now_add=True)
     updated = models.DateTimeField(_('date modified'), null=True, blank=True)
     read = models.BooleanField(_('has this post been read'), default=False)
@@ -101,7 +99,7 @@ class Post(models.Model):
         verbose_name = _('post')
         verbose_name_plural = _('posts')
         ordering = ('-updated',)
-        unique_together = (('feed', 'guid'),)
+        unique_together = (('feed', 'link'),)
 
     def __unicode__(self):
         return self.title
