@@ -1,6 +1,6 @@
 from django.test import TestCase
 from models import Feed, Post
-from models import create_post
+from tools import create_post
 
 import shelve
 from feedcache import cache
@@ -18,3 +18,9 @@ class FeedTests(TestCase):
         for entry in self.feed.entries:
             posts.append(create_post(entry))
 
+
+    def test_create_feed(self):
+        feed = Feed()
+        feed.feed_url = 'http://reddit.com/r/django.rss'
+        feed.name = 'Django Reddit'
+        feed.save()
