@@ -89,7 +89,8 @@ ul#post-list a {
 .item-head h3 {
     margin-bottom: 0;
     border-bottom: 0 solid !important;
-    font-family: "Adobe Caslon Pro","Hoefler Text",Georgia,Garamond,Times,serif;
+    font-family: "Berthold Baskerville", Georgia, serif;
+    font-weight: normal;
 }
 /* the link in the item-head */
 .item-head h3 a{

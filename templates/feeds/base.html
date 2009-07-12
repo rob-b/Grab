@@ -31,7 +31,7 @@
         </div>
 
         <p>
-        {{ post.content|safe }}
+        {{ post.get_content|safe }}
         </p>
         </li>
         {% endfor %}
