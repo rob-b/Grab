@@ -1,23 +1,7 @@
 from django.conf.urls.defaults import *
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
-
-from feeds.views import feed_list
-
 urlpatterns = patterns('',
-    # Example:
-    # (r'^grab/', include('grab.foo.urls')),
-
-    # Uncomment the next line to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line for to enable the admin:
-    (r'^admin/(.*)', admin.site.root),
-
-    # url(r'^$', feed_list, name="home"),
-    (r'feeds/', include('feeds.urls')),
+    (r'^', include('feeds.urls')),
 )
 
 from django.conf import settings
