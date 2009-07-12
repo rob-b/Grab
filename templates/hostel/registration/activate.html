@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+
+{% if user %}
+<h2>{% trans 'Congratulations, your account has been activated' %}</h2>
+<p>
+    {% trans 'You can now ' %}<a href="{% url login %}">{% trans 'login' %}</a>
+</p>
+{% else %}
+<h2>
+    {% trans 'Activation failed' %}
+</h2>
+<p>
+    It appears that the activation code is invalid.
+</p>
+{% endif %}
+
+{% endblock %}

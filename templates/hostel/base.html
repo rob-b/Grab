@@ -1,0 +1,268 @@
+{% load i18n %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% trans 'TITLE GOES HERE' %}{% endblock %}</title>
+
+  <!-- Framework CSS -->
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/basic.css" type="text/css" media="screen, projection" />
+  <!--<link rel="stylesheet" href="{{ MEDIA_URL }}css/screen.css" type="text/css" media="screen, projection">-->
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/print.css" type="text/css" media="print" />
+  <!--[if IE]>
+        <link rel="stylesheet"   type="text/css" media="all" href="{{ MEDIA_URL }}css/ie.css" />
+        <![endif]-->
+
+
+    <!-- Import fancy-type plugin for the sample page. -->
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}images/favicon.ico" />
+    <!--<link rel="stylesheet" href="{{ MEDIA_URL }}css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection" />-->
+</head>
+
+<body>
+
+   <!-- <div class="container">
+        <div class="span-24">
+        <div class="span-20">            
+        </div>
+
+        <div class="span-4 last">
+            {% if request.user.is_authenticated %}
+            <a href="{% url logout %}">
+                {% trans 'Logout' %} {{ request.user.username }}
+            </a>
+
+            {% if request.user.get_profile %}
+            <a href="{% url profiles_profile_detail username=request.user.username %}">
+                {% trans 'Profile' %}
+            </a>
+            {% else %}
+            <a href="{% url profiles_create_profile  %}">
+                {% trans 'Create Profile' %}
+            </a>
+
+            {% endif %}
+            {% else %}
+            <a href="{% url login %}">{% trans 'Login' %}</a>
+			<a href="{% url login %}">{% trans 'Login' %}</a>
+            {% endif %}
+        </div>
+        </div>
+        <hr/>
+
+       
+    </div>-->
+	
+				<!-- ACCESSIBILITY LINKS START -->
+            <ul id="access">
+                <li><a href="#navigation" accesskey="1">Jump to the main navigation</a></li>
+                <li><a href="#main_content" accesskey="2">Jump to the main content of the page</a></li>
+				<li><a href="#login" accesskey="3">Jump to login</a></li>
+				<li><a href="#search" accesskey="4">Jump to search</a></li>
+                <li><a href="#tags" accesskey="5">Jump to the tag cloud</a></li>
+                <li><a href="#footer" accesskey="6">Jump to the footer</a></li>
+            </ul>
+            <!-- ACCESSIBILITY LINKS END -->
+<div id="frame_holder" class="clearfix">
+	<div id="wrapper" class="clearfix">
+	
+		<div id="header" class="clearfix">
+			<h1>		
+				<a href="{% url home %}" title="Les Copines de Nina" class="replaced">{% trans 'Les Copines de Nina' %}</a>
+			</h1>
+		
+			<a href="#" title="#" class="products_banner replaced">Nina products</a>
+		</div>
+		
+		<div id="navigation">
+			<ul>
+				<li><a href="#" title="#">Gossip Room</a></li>
+				<li><a href="#" title="#">Belle & Zen</a></li>
+				<li><a href="#" title="#">Dressing</a></li>
+				<li><a href="#" title="#">Troc</a></li>
+				<li><a href="#" title="#">Sorties</a></li>
+				<li><a href="#" title="#">Culture</a></li>
+				<li><a href="#" title="#">Du Son!</a></li>
+				<li class="last"><a href="#" title="#">Escapades</a></li>
+			</ul>
+		</div>
+		
+		<div id="content">
+		{% block content %}
+			<div id="main_content">
+			
+				<h2>Competition</h2>
+				<h3 class="tagline">les concourses de nina</h3>
+			
+				<div id="main_competition">				
+					<div id="competition_details" class="clearfix">
+						<h3>concours lorem ipsum</h3>
+						<p>du 21 avril au 21 mai 2009</p>
+					</div>
+					<div class="overlay clearfix">
+						<h2>Win a weekend in Monaco!</h2>
+						<a href="/competition/" title="Enter the competition">Enter now</a>
+					</div>
+				</div>
+			
+			</div>
+		{% endblock %}	
+			
+			<div id="sub_content">
+			
+				<div id="login">
+				<!--{% if not user.is_authenticated %}
+					<form>
+						<fieldset>
+							<legend>Login or register</legend>
+							<label>Username</label>
+							<input type="text"/>
+							<label>Password</label>
+							<input type="text"/>
+							<button type="submit"><img src="{{ MEDIA_URL }}images/pink_btn.jpg" alt="Pink submit button" />OK</button>
+						</fieldset>
+					</form>
+					<ul>
+						<li><a href="#">{% trans 'Forgotten your password?' %}</a></li>
+						<li><a href="#">{% trans 'Sign up to meet new friends' %}</a></li>
+					</ul>
+				{% else %}
+				{% endif %}-->
+				<div class="logged_in">
+					<h2>Bonjour Hannah!</h2>
+					<p>Monday 18 May 2009</p>
+					
+					<ul>
+					<li><p>See <a href="#" title="My account page">my account</a></p></li>
+					<li><p>Update <a href="#" title="My account page">my profile</a></p></li>
+					<li><p>Find friends in <a href="#" title="My account page">my area</a></p></li>
+					</ul>
+				</div>
+				 
+				</div>
+				
+				
+				
+				<div id="search">
+				<h2>Search</h2>
+				<form>
+                    <fieldset>
+                        <legend class="hidden">Search Site</legend>
+                        <label class="hidden">Search</label>
+                        <input type="text"/>
+						<button type="submit"><img src="{{ MEDIA_URL }}images/pink_btn.jpg" alt="Pink submit button" />OK</button>
+                    </fieldset>
+                </form>
+				</div>
+				
+				<div id="competition">
+					<div class="overlay">
+						<h2>Win a weekend in Monaco!</h2>
+						<a href="#">Enter now</a>
+					</div>
+				</div>
+				
+				<div id="status_updates">
+					<h2>Member's moods</h2>
+					<ul>
+						<li class="clearfix">
+							<span>
+								<img src="{{ MEDIA_URL }}images/sophie.png" alt="Sophie's profile photo" />
+							</span>
+							<h4><a href="#">Sophie</a></h4>
+							<p>Likes the sunny weather!</p>
+						</li>
+						<li class="clearfix">
+							<span>
+								<img src="{{ MEDIA_URL }}images/sophie.png" alt="Sophie's profile photo" />
+							</span>
+							<h4><a href="#">Sophie</a></h4>
+							<p>Likes the sunny weather!</p>
+						</li>
+						<li class="clearfix">
+							<span>
+								<img src="{{ MEDIA_URL }}images/sophie.png" alt="Sophie's profile photo" />
+							</span>
+							<h4><a href="#">Sophie</a></h4>
+							<p>Likes the sunny weather!</p>
+						</li>
+						<li class="clearfix last">
+							<span>
+								<img src="{{ MEDIA_URL }}images/sophie.png" alt="Sophie's profile photo" />
+							</span>
+							<h4><a href="#">Sophie</a></h4>
+							<p>Likes the sunny weather!</p>
+						</li>
+					</ul>
+				</div>
+				
+				<div id="recent_posts">
+					<h2>Recent posts</h2>
+					<ul>
+						<li>
+							<h4><a href="#">30.01.09-Oasis ce soir</a></h4>
+							<p>Sophie</p>
+						</li>
+						<li>
+							<h4><a href="#">30.01.09-Oasis ce soir</a></h4>
+							<p>Sophie</p>
+						</li>
+						<li>
+							<h4><a href="#">30.01.09-Oasis ce soir</a></h4>
+							<p>Sophie</p>
+						</li>
+						<li class="last">
+							<h4><a href="#">30.01.09-Oasis ce soir</a></h4>
+							<p>Sophie</p>
+						</li>
+					</ul>
+					<a href="#" class="all">All posts by date</a>
+				</div>
+				
+				<div id="reports">
+				<h2>Reports</h2>
+				<img src="{{ MEDIA_URL }}images/lille.jpg" alt="A girl in a white dress" />
+				<h4>Viree a Lille</h4>
+				<p>Ce mois-ci, Gaelle nous fait decouvrir son coup de coeur pour Lille et ses boutiques vintage.</p>
+				<a href="#" class="all">All the videos</a>
+				</div>
+				
+			</div><!-- end of sub content-->
+			
+			<div id="tags">
+				<ul>
+					<li><a href="#" title="#" class="xxl">Tag 1</a></li>
+					<li><a href="#" title="#" class="xl">Tag 2</a></li>
+					<li><a href="#" title="#" class="l">Tag 3</a></li>
+					<li><a href="#" title="#" class="m">Tagtag 4</a></li>
+					<li><a href="#" title="#" class="s">Tag 5</a></li>
+					<li><a href="#" title="#" class="xs">Tag 6</a></li>
+					<li><a href="#" title="#" class="m">Tag 1</a></li>
+					<li><a href="#" title="#" class="xxl">Tag 2</a></li>
+					<li><a href="#" title="#" class="xs">Tag 3</a></li>
+					<li><a href="#" title="#" class="l">Tagtag 4</a></li>
+					<li><a href="#" title="#" class="m">Tag 5</a></li>
+					<li><a href="#" title="#" class="xl">Tag 6</a></li>					
+					
+				</ul>
+			</div>
+			
+			
+		</div><!--end of content div-->
+		
+		
+		
+	</div><!--end of wrapper-->
+	<div id="footer">
+				<ul class="clearfix">
+					<li><a href="#" title="#">Mentions legales</a></li>
+					<li><a href="#" title="#">Credit</a></li>
+					<li><a href="#" title="#">Contact</a></li>
+					<li class="logo"><a href="#" title="#">Plan</a></li>
+					<li class="logo"><a href="http://www.ninaricci.com" title="#" ><img src="{{ MEDIA_URL }}images/logo.jpg" alt="Nina Ricci logo" /></a></li>
+					
+				</ul>
+			</div>
+</div><!--end of frame holder-->
+</body>
+</html>

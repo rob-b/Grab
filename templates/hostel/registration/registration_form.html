@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div id="main_content">
+
+	<form action="" method="post">
+	    {% for field in form %}
+	    <div {% if field.errors %}class=" error"{% endif %}>
+	        {{ field.errors }}
+	        <label for="{{ field.auto_id }}" class="clearfix">
+	            {{ field.label }}
+	            {% if field.field.required %}*{% endif %}
+	        </label>
+
+	        {{ field }}
+	        {% if field.help_text %}
+	        <span class="small quiet">{{ field.help_text }}</span>
+	        {% endif %}
+	    </div>
+	    {% endfor %}
+	    <input type="submit" value="Submit">
+	</form>
+</div>
+{% endblock %}

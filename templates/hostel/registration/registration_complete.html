@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<h2>{% trans 'Congratulations, you have successfully registered' %}</h2>
+{% blocktrans %}
+<p>
+    You should receive an email soon that contains details on how to activate
+    your account.
+</p>
+{% endblocktrans %}
+
+{% endblock %}

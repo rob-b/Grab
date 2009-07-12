@@ -1,0 +1,15 @@
+<form action="" method="post" enctype="multipart/form-data">
+    {% for field in form %}
+    <div {% if field.errors %}class="error"{% endif %}>
+        {{ field.errors }}
+        {{ field.label_tag }}{% if field.field.required %}*{% endif %}
+
+        {% if field.help_text %}
+            {{ field.help_text }}
+        {% endif %}
+        <br>
+        {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
