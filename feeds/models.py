@@ -59,7 +59,7 @@ class Feed(models.Model):
         return ('feed_detail', str(self.id))
 
 class Post(models.Model):
-    feed = models.ForeignKey(Feed, verbose_name=_('feed'))
+    feed = models.ForeignKey('Feed', verbose_name=_('feed'))
     title = models.CharField(_('title'), max_length=255)
     link = models.URLField(_('link'), )
     summary = models.TextField(_('summary'), blank=True)

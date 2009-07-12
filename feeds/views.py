@@ -1,6 +1,7 @@
 from hostel.decorators import rendered
 from feeds.models import Feed, Post
 from feeds.tools import FeedProcessor
+from feeds.tools import populate_feed
 from feeds.forms import FeedForm
 
 from django.shortcuts import get_object_or_404
@@ -17,10 +18,11 @@ def feed_detail(request, object_id, update=False):
     feed_status = False
 
     if update:
-        fp = FeedProcessor(Post)
-        feed = fp.process_feed(feed)
-        if hasattr(feed, 'status') and feed.status == 304:
-            feed_status = "unmodified"
+        populate_feed(feed)
+        # fp = FeedProcessor(Post)
+        # feed = fp.process_feed(feed)
+        # if hasattr(feed, 'status') and feed.status == 304:
+        #     feed_status = "unmodified"
     posts = Post.objects.filter(feed=feed.id)
 
     data = {
