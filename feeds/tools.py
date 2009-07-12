@@ -1,4 +1,5 @@
 from django.db import models
+from django.db import IntegrityError
 import feedparser
 from datetime import datetime
 import time
@@ -14,33 +15,51 @@ def populate_feed(feed_obj):
 
     # this is not threadsafe and will likely break on a real server
     storage = shelve.open(feed_obj.name)
-    fc = cache.Cache(storage)
-    item = fc.fetch(feed_obj.feed_url)
-    # item = feedparser.parse(feed_obj.feed_url)
-    feed_obj.title = item.feed.title
-    feed_obj.link = item.feed.link
-    feed_obj.etag = item.etag
-    feed_obj.tagline = item.feed.tagline
     try:
-        feed_obj.updated = mtime(item.modified)
-    except AttributeError:
-        feed_obj.updated = None
-    feed_obj.last_checked = datetime.now()
-    for entry in item.entries:
-        post = create_post(entry)
-        post.feed = feed_obj
-        post.save()
+        fc = cache.Cache(storage)
+        item = fc.fetch(feed_obj.feed_url)
+        # item = feedparser.parse(feed_obj.feed_url)
+        feed_obj.title = item.feed.title
+        feed_obj.link = item.feed.link
+        feed_obj.etag = item.etag
+        feed_obj.tagline = item.feed.tagline
+        try:
+            feed_obj.updated = mtime(item.modified)
+        except AttributeError:
+            feed_obj.updated = None
+        feed_obj.last_checked = datetime.now()
+        for entry in item.entries:
+            post = create_post(entry, feed_obj)
+    finally:
+        storage.close()
 
-def create_post(entry):
+def create_post(entry, feed):
     from models import Post
-    post = Post()
+    """creates a post and attaches it to a feed"""
+    kwargs = {'feed': feed}
+    kwargs.update(entry_to_post_args(entry))
+    try:
+        post, created = Post.objects.get_or_create(**kwargs)
+    # for reasons i do not understand this may sometimes raise an integrityerror
+    # i thought that get_or_create would not throw that sort of error but it
+    # does
+    except IntegrityError:
+        return None
+    return post
+
+def entry_to_post_args(entry):
+    """takes an entry from feedparser and returns a dict of the args needed to
+    create a post object"""
+    from models import Post
+    kwargs = {}
     for k, v in entry.items():
         try:
-            field = post._meta.get_field_by_name(k)[0]
+            field = Post._meta.get_field_by_name(k)[0]
         except models.FieldDoesNotExist:
             continue
         if not isinstance(field, models.AutoField):
-            setattr(post, k, v)
+            # setattr(post, k, v)
+            kwargs[k] = v
 
     # we cannot be sure of the entry.items order and so we have to setup the
     # datefield handling after initial values have been set. feels unDRY
@@ -49,12 +68,13 @@ def create_post(entry):
             continue
         name = k.replace('_parsed', '')
         try:
-            field = post._meta.get_field_by_name(name)[0]
+            field = Post._meta.get_field_by_name(name)[0]
         except models.FieldDoesNotExist:
             continue
-        if hasattr(post, name) and isinstance(field, models.DateTimeField):
-            setattr(post, name, mtime(v))
-    return post
+        if isinstance(field, models.DateTimeField):
+            # setattr(post, name, mtime(v))
+            kwargs[name] = mtime(v)
+    return kwargs
 
 # old, possibly useless code
 class FeedProcessor(object):
