@@ -64,7 +64,7 @@ class Post(models.Model):
     link = models.URLField(_('link'), )
     summary = models.TextField(_('summary'), blank=True)
     content = models.TextField(_('content'), blank=True)
-    author = models.CharField(_('author'), max_length=50, blank=True)
+    author = models.CharField(_('author'), max_length=255, blank=True)
     author_email = models.EmailField(_('author email'), blank=True)
     created = models.DateField(_('date created'), auto_now_add=True)
     updated = models.DateTimeField(_('date modified'), null=True, blank=True)
@@ -81,6 +81,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return self.link
+
+    @property
+    def get_content(self):
+        return self.content or self.summary
 
 # signals
 def feed_creation(sender, **kwargs):
