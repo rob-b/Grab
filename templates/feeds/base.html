@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load pagination_tags i18n %}
 
-{% load pagination_tags %}
+{% block title %}{{ feed.name }}{% endblock title %}
 
 {% block content %}
 <div class="module">
@@ -13,26 +14,24 @@
         {% autopaginate posts %}
         {% for post in posts %}
 
-        {% if post.read %}
-        <li class="read">
-        {% else %}
-        <li>
-        {% endif %}
+        <li {% if post.read %}class="read"{% endif%}>
+            <div class="item-head clearfix">
+                <p class="meta clearfix">
+                {{ post.updated|date:"d.M"|upper }}
+                </p>
+                <h3>
+                    <a href="{{ post.link }}">
+                        {{ post }}
+                    </a>
+                </h3>
+                {% if post.author %}
+                <h4>{{ post.author }}</h4>
+                {% endif %}
+            </div>
 
-        <div class="item-head clearfix">
-            <p class="meta clearfix">
-            {{ post.updated|date:"d.M"|upper }}
-            </p>
-        <h3>
-        <a href="{{ post.link }}">
-            {{ post }}
-        </a>
-        </h3>
-        </div>
-
-        <p>
-        {{ post.get_content|safe }}
-        </p>
+            <div class="item-body">
+            {{ post.get_content|safe }}
+            </div>
         </li>
         {% endfor %}
     </ul>
@@ -44,9 +43,9 @@
 
 {% block feed_list %}
 
-<h2>Feeds</h2>
-<a href="{% url feed_add %}">
-    Add feed
+<h2>{% trans 'Feeds' %}</h2>
+<a href="{% url feed_add %}" class="action">
+    {% trans 'Add feed' %}
 </a>
 {% for feed in feeds %}
     <div class="{% cycle "odd" "even" %}">
@@ -55,9 +54,6 @@
                 {{ feed.name }}
             </a>
         </h3>
-        <p>
-            <a href="{{ feed.link}}">{{ feed.link }}</a>
-        </p>
     </div>
 {% endfor %}
 {% endblock %}

@@ -13,10 +13,16 @@ a:active {
     color: #333;
 }
 
+/* fonts */
+h1, h2, h3, h4, h5 {
+    font-family: "Berthold Baskerville", Baskerville, Georgia, serif;
+    font-weight: normal;
+}
+
+
 #header {
     background: #333;
     color: #eeecde;
-    font-family: Palatino,"Book Antiqua","URW Palladio L",serif;
     margin-bottom: 20px;
 }
 #header h1 {
@@ -38,17 +44,14 @@ div#feed-list h2 {
     color: #333;
     margin-bottom: 5px;
     border-bottom: 2px solid;
-    font-family: "Franklin Gothic Medium", "Arial Narrow Bold", Arial, sans-serif;
-    font-family: "Adobe Caslon Pro","Hoefler Text",Georgia,Garamond,Times,serif;
     letter-spacing: 1px;
-    font-weight: normal;
     font-variant: small-caps;
 }
 div#feed-list h3 {
     margin-bottom: 0;
-    font-family: "Lucida fax", Georgia, "Times New Roman", serif;
     color: #333;
-    padding: 2px;
+    padding: 2px 2px 2px 0;
+    padding: 0;
 }
 div#feed-list h3 a {
     text-decoration: none;
@@ -63,7 +66,7 @@ div#feed-list h3 a:hover {
     border-bottom: 2px solid;
 }
 div#feed-list div {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     /* background: #d1d0c3; */
 }
 div#feed-list div a {
@@ -71,6 +74,7 @@ div#feed-list div a {
 }
 div#feed-list div p {
     padding: 3px 2px;
+    margin-bottom: 0;
 }
 
 /* a list of posts belonging to a feed */
@@ -80,16 +84,28 @@ ul#post-list a {
     color: #0061de;
     text-decoration: none;
 }
+ul#post-list li {
+    margin-left: 0;
+    padding-left: 0;
+    list-style-type: none;
+    padding: 5px 5px 5px 0;
+    margin-bottom: 20px;
+    color: #888;
+}
+ul#post-list li.read {
+    border: 1px solid #cac9db;
+    background: #f7f6ef;
+}
 
 /* the head of a feed item */
 .item-head {
     margin-bottom: 20px;
     /* line-height: 17px; */
 }
-.item-head h3 {
+.item-head h3,
+.item-head h4 {
     margin-bottom: 0;
     border-bottom: 0 solid !important;
-    font-family: "Berthold Baskerville", Georgia, serif;
     font-weight: normal;
 }
 /* the link in the item-head */
@@ -101,30 +117,10 @@ ul#post-list a {
     margin-bottom: 0;
     margin-left: 5px;
 }
-ul#post-list li {
-    margin-left: 0;
-    padding-left: 0;
-    list-style-type: none;
-    padding: 5px 5px 5px 0;
-    padding: 5px;
-    background: #fff;
-    margin-bottom: 20px;
-    color: #888;
+.item-body li {
+    padding: 0 !important;
+    margin: 0 !important;
 }
-ul#post-list li.read {
-    border: 1px solid #cac9db;
-    background: #f7f6ef;
-}
-/* ul#post-list h3 {
-    border-bottom: 1px solid;
-}
-ul#post-list h3 a {
-    text-decoration: none;
-    color: #555;
-    font-weight: bold;
-    font-size: 15px;
-}                                */
-
 
 
 .meta {
@@ -133,6 +129,14 @@ ul#post-list h3 a {
     font-weight: normal;
 }
 .module {
+}
+
+/* actions */
+a.action {
+    display:block;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    color: #ff0573;
 }
 
 
