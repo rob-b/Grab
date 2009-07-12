@@ -4,6 +4,7 @@ from feeds.tools import FeedProcessor
 from feeds.forms import FeedForm
 
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 
 @rendered
 def feed_list(request):
@@ -36,6 +37,7 @@ def feed_add(request):
         form = FeedForm(request.POST)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect(form.instance.get_absolute_url())
     else:
         form = FeedForm()
     return 'feeds/feed_add.html', {'form': form}
