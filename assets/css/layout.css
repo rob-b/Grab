@@ -173,15 +173,15 @@ ul#post-list li h2 {
 .meta .read button {
     background: no-repeat url(../img/bullet_toggle_plus.png);
 }
-.prev,
-.next {
+.prev-item,
+.next-item {
     background: no-repeat url(../img/bullet_arrow_down.png) top left;
     text-indent: -10000em;
     display: block;
     float: left;
     width: 16px;
 }
-.prev {
+.prev-item {
     background: no-repeat url(../img/bullet_arrow_up.png);
 }
 .module {

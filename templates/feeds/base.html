@@ -26,8 +26,8 @@
                     {{ form }}
                     <button type="submit">{% trans 'Mark as read' %}</button>
                 </form>
-                <a href="" class="next">Next</a>
-                <a href="" class="prev">Prev</a>
+                <a href="" class="next-item">{% trans 'Next' %}</a>
+                <a href="" class="prev-item">{% trans 'Prev' %}</a>
                 </div>
                 <h3>
                     <a href="{{ post.link }}">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="item-body">
-            {{ post.get_content|safe }}
+            {{ post.get_content|safe|typogrify }}
             </div>
         </li>
         {% endfor %}
