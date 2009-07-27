@@ -112,7 +112,7 @@ ul#post-list li.read {
 .item-head h3 a{
     color: #555 !important;
 }
-.item-head p {
+.item-head div {
     float: right;
     margin-bottom: 0;
     margin-left: 5px;
@@ -127,6 +127,11 @@ ul#post-list li.read {
     color: #b9b8af;
     font-size: 13px;
     font-weight: normal;
+}
+.meta button {
+    text-indent: -10000em;
+    border: none;
+    background: no-repeat url(../img/bullet_toggle_plus.png);
 }
 .module {
 }
