@@ -1,5 +1,7 @@
 from django.db import models
 from django.db import IntegrityError
+from django.conf import settings
+from django.utils import importlib
 import feedparser
 from datetime import datetime
 import time
@@ -41,8 +43,8 @@ def populate_feed(feed_obj):
         storage.close()
 
 def create_post(entry, feed):
-    from models import Post
     """creates a post and attaches it to a feed"""
+    from models import Post
     kwargs = {'feed': feed}
     kwargs.update(entry_to_post_args(entry))
     if 'updated' not in kwargs:
@@ -53,6 +55,15 @@ def create_post(entry, feed):
     except IntegrityError:
         return None
     return post
+
+def import_filter(filter):
+    components = filter.split('.')
+    path = components[:-1]
+    func = components[-1]
+    module = importlib.import_module('.'.join(path))
+    if hasattr(module, func) and callable(getattr(module, func)):
+        return getattr(module, func)
+    return None
 
 def entry_to_post_args(entry):
     """takes an entry from feedparser and returns a dict of the args needed to
@@ -86,6 +97,16 @@ def entry_to_post_args(entry):
         if isinstance(field, models.DateTimeField):
             # setattr(post, name, mtime(v))
             kwargs[name] = mtime(v)
+
+    try:
+        filters = settings.POST_FILTERS
+    except AttributeError:
+        pass
+    else:
+        for filter in filters:
+            filter = import_filter(filter)
+            if filter is not None:
+                kwargs = filter(kwargs)
     return kwargs
 
 # old, possibly useless code
