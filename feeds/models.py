@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from tools import populate_feed
+from managers import PostManager
 import feedparser
 
 
@@ -69,6 +70,7 @@ class Post(models.Model):
     created = models.DateField(_('date created'), auto_now_add=True)
     updated = models.DateTimeField(_('date modified'), null=True, blank=True)
     read = models.BooleanField(_('has this post been read'), default=False)
+    objects = PostManager()
 
     class Meta:
         verbose_name = _('post')

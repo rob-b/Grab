@@ -18,4 +18,7 @@ urlpatterns = patterns('',
      {'update':True}),
 
     url(r'^add/$', feed_add, name='feed_add'),
+    url(r'^read/(?P<object_id>\d+)/$',
+        'post_read',
+        name='feeds_post_read'),
 )
