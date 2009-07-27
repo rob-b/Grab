@@ -6,6 +6,7 @@ from feeds.forms import FeedForm, ReadForm
 
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from django.views.decorators.http import require_POST
 
 @rendered
 def feed_list(request, all_posts=False):
@@ -16,17 +17,16 @@ def feed_list(request, all_posts=False):
     }
 
 @rendered
-def feed_detail(request, object_id, update=False):
+def feed_detail(request, object_id, update=False, all_posts=False):
     feed = get_object_or_404(Feed, id=object_id)
     feed_status = False
 
     if update:
         populate_feed(feed)
-        # fp = FeedProcessor(Post)
-        # feed = fp.process_feed(feed)
-        # if hasattr(feed, 'status') and feed.status == 304:
-        #     feed_status = "unmodified"
-    posts = Post.objects.unread().filter(feed=feed.id)
+    if not all_posts:
+        posts = Post.objects.unread().filter(feed=feed.id)
+    else:
+        posts = Post.objects.all().filter(feed=feed.id)
 
     data = {
         'feed': feed,
@@ -48,12 +48,16 @@ def feed_add(request):
     return 'feeds/feed_add.html', {'form': form}
 
 @rendered
-def post_read(request, object_id):
+@require_POST
+def post_read(request, object_id, read=True):
+    dest = request.META.get('HTTP_REFERER')
     try:
         post = Post.objects.get(pk=object_id)
     except Post.DoesNotExist:
         assert False, 'What should i do?'
-    post.read = True
+    post.read = read
     post.save()
-    return HttpResponseRedirect(post.feed.get_absolute_url())
+    return HttpResponseRedirect(dest)
 
+def post_unread(request, object_id):
+    return post_read(request, object_id, False)
