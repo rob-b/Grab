@@ -28,6 +28,13 @@ def populate_feed(feed_obj):
         except AttributeError:
             feed_obj.updated = None
         feed_obj.last_checked = datetime.now()
+
+        # we reverse the list because some feeds do not have modified date for
+        # the entries and so will end up with modified stamps that we generate.
+        # newer items will still be at the front of the list of items though.
+        # reversal means that the entries will still be stored in something
+        # resembling their actual publication order
+        item.entries.reverse()
         for entry in item.entries:
             post = create_post(entry, feed_obj)
     finally:
@@ -38,11 +45,11 @@ def create_post(entry, feed):
     """creates a post and attaches it to a feed"""
     kwargs = {'feed': feed}
     kwargs.update(entry_to_post_args(entry))
+    if 'updated' not in kwargs:
+        kwargs['updated'] = datetime.now()
     try:
         post, created = Post.objects.get_or_create(**kwargs)
     # for reasons i do not understand this may sometimes raise an integrityerror
-    # i thought that get_or_create would not throw that sort of error but it
-    # does
     except IntegrityError:
         return None
     return post
@@ -59,6 +66,11 @@ def entry_to_post_args(entry):
             continue
         if not isinstance(field, models.AutoField):
             # setattr(post, k, v)
+            if k == 'content':
+                try:
+                    v = entry[k][0]['value']
+                except (IndexError, KeyError):
+                    pass
             kwargs[k] = v
 
     # we cannot be sure of the entry.items order and so we have to setup the
