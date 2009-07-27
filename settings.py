@@ -36,7 +36,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'site_media')
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'assets')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -96,6 +96,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'south',
     # 'debug_toolbar',
+    'typogrify',
 )
 
 CACHE_BACKEND = 'dummy:///'
