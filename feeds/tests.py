@@ -22,7 +22,6 @@ class FeedTests(TestCase):
         for entry in self.feed.entries:
             post = Post(**entry_to_post_args(entry))
             posts.append(post)
-        self.assertEqual(post.title, entry.title)
 
     def test_create_feed(self):
         feed = Feed()
@@ -39,4 +38,3 @@ class FeedTests(TestCase):
 
         dest = feed.get_absolute_url() + 'fresh/'
         response = self.client.get(dest)
-        import ipdb; ipdb.set_trace();
