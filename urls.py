@@ -6,8 +6,9 @@ urlpatterns = patterns('',
 
 from django.conf import settings
 if settings.DEBUG:
+    MEDIA_URL = settings.MEDIA_URL.strip('/')
     urlpatterns += patterns('',
-
-        (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
+        (r'^%s(?P<path>.*)$' % MEDIA_URL, 'django.views.static.serve',
          {'document_root': settings.MEDIA_ROOT,
-          'show_indexes': True}),)
+          'show_indexes': True}),
+)
