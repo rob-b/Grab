@@ -81,36 +81,59 @@ div#feed-list div p {
 
 /* links in a post item */
 ul#post-list a {
-    color: #0061de;
     text-decoration: none;
+}
+div.item-body a {
+    color: #0061de;
 }
 ul#post-list li {
     margin-left: 0;
-    padding-left: 0;
     list-style-type: none;
-    padding: 5px 5px 5px 0;
+    /* padding: 0 4px; */
     margin-bottom: 20px;
     color: #888;
+    border: 1px solid #eeecde;
 }
 ul#post-list li.read {
     border: 1px solid #cac9db;
     background: #f7f6ef;
+}
+ul#post-list li:hover {
+    /* border: 1px solid #cac9db; */
+}
+
+/* reset some styles for the post content html */
+ul#post-list li h2 {
+    border-bottom: none;
+    font-size: 1.5em;
+    font-family: Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+    color: #888;
+    font-variant: normal;
 }
 
 /* the head of a feed item */
 .item-head {
     margin-bottom: 20px;
     /* line-height: 17px; */
+    border-bottom: 1px solid #eeecde;
 }
 .item-head h3,
 .item-head h4 {
     margin-bottom: 0;
     border-bottom: 0 solid !important;
     font-weight: normal;
+    letter-spacing: 1px;
 }
 /* the link in the item-head */
 .item-head h3 a{
-    color: #555 !important;
+    color: #555 ;
+}
+/* the link in the item-head when the containing list-item is hovered */
+#post-list li:hover .item-head a {
+    color: #222;
+}
+.item-head h3 a:hover {
+    color: #ff0573 !important;
 }
 .item-head div {
     float: right;
@@ -121,8 +144,22 @@ ul#post-list li.read {
     padding: 0 !important;
     margin: 0 !important;
 }
+/* when a post-list item is hovered */
+#post-list li:hover .item-head h4,
+#post-list li:hover .item-body {
+    color: #666;
+}
+#post-list li:hover .item-body a {
+    color: #0049a7;
+}
 
-
+/* focused item in the post list */
+.active-item .item-head h3 a {
+    color: #222;
+}
+.active-item .item-head {
+    border-bottom: 1px dotted #666;
+}
 .meta {
     color: #b9b8af;
     font-size: 13px;
@@ -131,7 +168,21 @@ ul#post-list li.read {
 .meta button {
     text-indent: -10000em;
     border: none;
+    background: no-repeat url(../img/bullet_toggle_minus.png);
+}
+.meta .read button {
     background: no-repeat url(../img/bullet_toggle_plus.png);
+}
+.prev,
+.next {
+    background: no-repeat url(../img/bullet_arrow_down.png) top left;
+    text-indent: -10000em;
+    display: block;
+    float: left;
+    width: 16px;
+}
+.prev {
+    background: no-repeat url(../img/bullet_arrow_up.png);
 }
 .module {
 }
