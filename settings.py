@@ -102,6 +102,9 @@ INSTALLED_APPS = (
 CACHE_BACKEND = 'dummy:///'
 INTERNAL_IPS = ('127.0.0.1',)
 
+# feeds settings
+POST_FILTERS = 'feeds.filters.kill_guardian_tracking',
+
 try:
     from settings_local import *
 except ImportError:
