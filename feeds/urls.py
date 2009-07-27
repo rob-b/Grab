@@ -10,8 +10,9 @@ feed_dict = {
     'template_object_name': 'feed',
 }
 
-urlpatterns = patterns('',
-    url(r'^$', feed_list, name="home"),
+urlpatterns = patterns('feeds.views',
+    url(r'^$', 'feed_list', name="home"),
+    url(r'^all/$', 'feed_list', {'all_posts': True}, name="feeds_home_all"),
     url(r'^(?P<object_id>[\d]+)/$', feed_detail, name="feed_detail"),
     (r'(?P<object_id>[\d]+)/fresh/$',
      feed_detail,
