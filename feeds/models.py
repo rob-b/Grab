@@ -37,7 +37,7 @@ class Feed(models.Model):
 
     title = models.CharField(_('title'), max_length=200, blank=True)
     tagline = models.TextField(_('tagline'), blank=True)
-    link = models.URLField(_('link'), blank=True)
+    link = models.URLField(_('link'), max_length=255, blank=True)
 
     # http://feedparser.org/docs/http-etag.html
     etag = models.CharField(_('etag'), max_length=50, blank=True, null=True)
@@ -57,12 +57,12 @@ class Feed(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('feed_detail', str(self.id))
+        return ('feed_detail', [str(self.pk)])
 
 class Post(models.Model):
     feed = models.ForeignKey('Feed', verbose_name=_('feed'))
     title = models.CharField(_('title'), max_length=255)
-    link = models.URLField(_('link'), )
+    link = models.URLField(_('link'), max_length=255)
     summary = models.TextField(_('summary'), blank=True)
     content = models.TextField(_('content'), blank=True)
     author = models.CharField(_('author'), max_length=255, blank=True)
