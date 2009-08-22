@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^', include('feeds.urls')),
+    (r'', include('feeds.urls')),
 )
 
 from django.conf import settings
