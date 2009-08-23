@@ -56,6 +56,18 @@ a:active { color: #333333; }
   margin-left: 10px;
   margin-right: 10px;
 }
+#feed-list a { text-decoration: none; }
+#feed-list h2 + a {
+  color: #ff0573;
+  float: left;
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+#feed-list h2 + a + div {
+  clear: left;
+  margin-bottom: 5px;
+}
+#feed-list h3 { margin-bottom: 0; }
 #content {
   float: left;
   display: inline;
@@ -104,6 +116,7 @@ a:active { color: #333333; }
   font-size: 13px;
   font-weight: normal;
 }
+.meta form p { margin: 0; }
 .meta button {
   text-indent: -10000em;
   border: none;
