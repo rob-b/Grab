@@ -1,3 +1,21 @@
+/* setup some constants */
+@bg_colour: #fff;
+@main_text_colour: #333;
+@light_text_colour: #666;
+
+/* mixin classes */
+.w50 { width: 50%; }
+.w33 { width: 33.33%; }
+.w66 { width: 66.66%; }
+.block {
+    float: left;
+    display: inline;
+    *margin-left: -0.04em;
+}
+.grey_border {
+    border-bottom: 1px solid #ddd;
+}
+
 /* heading sizes */
 @h1_font_size: 25px;
 h1 {
@@ -41,6 +59,13 @@ h1, h2, h3, h4, h5 {
 #header h1 a {
     text-decoration: none;
 }
+h2 {
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    letter-spacing: 1px;
+    font-variant: small-caps;
+    .grey_border;
+}
 
 
 /* some spacing for block level elements */
@@ -76,13 +101,13 @@ li {
     margin-left: 30px;
 }
 
-/* setup some constants */
-@bg_colour: #fff;
-@main_text_colour: #333;
 
 body {
     background: @bg_colour;
     color: @main_text_colour;
+    font: 0.8125em/1.5 Geneva, "Lucida Sans", Verdana, sans-serif;
+    width: 960px;
+    margin: 0 auto;
 }
 
 /* generic link styles */
@@ -96,3 +121,44 @@ a:active {
 }
 
 
+/* left hand side column; list of subscribed feeds */
+#feed-list {
+    .block;
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* right hand side column; list of items in a feed */
+#content {
+    .block;
+    width: 620px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#content > ul a {
+    text-decoration: none;
+}
+
+#content > ul li {
+    margin-left: 0;
+    list-style-type: none;
+    margin-bottom: 20px;
+    color: #888;
+}
+
+/* meta */
+.meta {
+    color: #b9b8af;
+    font-size: 13px;
+    font-weight: normal;
+}
+.meta button {
+    text-indent: -10000em;
+    border: none;
+    background: no-repeat url(../img/bullet_toggle_minus.png);
+}
+.meta .read button {
+    background: no-repeat url(../img/bullet_toggle_plus.png);
+}

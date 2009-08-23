@@ -4,31 +4,33 @@
 {% block title %}{{ feed.name }}{% endblock title %}
 
 {% block content %}
-<div class="module">
 
     {% block list_title %}
     <h2>{{ feed.name }}</h2>
     {% endblock %}
 
-    <ul id="post-list">
+    <ul>
         {% autopaginate posts %}
         {% for post in posts %}
 
         <li {% if post.read %}class="read"{% endif%}>
-            <div class="item-head clearfix" id="#item-{{ forloop.counter }}">
+            <div class="item-head clearfix" id="item-{{ forloop.counter }}">
+
+                {% comment %}
                 <div class="meta clearfix">
-                {{ post.updated|date:"d.M"|upper }}
-                {% if post.read %}
-                <form action="{% url feeds_post_unread post.pk %}" method="post" class="read">
-                {% else %}
-                <form action="{% url feeds_post_read post.pk %}" method="post">
-                {% endif %}
-                    {{ form }}
-                    <button type="submit">{% trans 'Mark as read' %}</button>
-                </form>
-                <a href="" class="prev-item">⇧</a>
-                <a href="" class="next-item">⬇</a>
+                    {{ post.updated|date:"d.M"|upper }}
+                    {% if post.read %}
+                    <form action="{% url feeds_post_unread post.pk %}" method="post" class="read">
+                    {% else %}
+                    <form action="{% url feeds_post_read post.pk %}" method="post">
+                    {% endif %}
+                        {{ form }}
+                        <button type="submit">{% trans 'Mark as read' %}</button>
+                    </form>
+                    <a href="" class="prev-item">⇧</a>
+                    <a href="" class="next-item">⬇</a>
                 </div>
+                {% endcomment %}
                 <h3>
                     <a href="{{ post.link }}">
                         {{ post|typogrify }}
@@ -47,8 +49,6 @@
     </ul>
 
     {% paginate %}
-
-</div>
 {% endblock %}
 
 {% block feed_list %}
