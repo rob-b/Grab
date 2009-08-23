@@ -23,7 +23,9 @@
                     <form action="{% url feeds_post_read post.pk %}" method="post">
                     {% endif %}
                         {{ form }}
-                        <button type="submit">{% trans 'Mark as read' %}</button>
+                        <p>
+                            <button type="submit">{% trans 'Mark as read' %}</button>
+                        </p>
                     </form>
                     <a href="" class="prev-item">⇧</a>
                     <a href="" class="next-item">⬇</a>
@@ -38,7 +40,7 @@
                 {% endif %}
             </div>
 
-            <div class="item-body">
+            <div>
             {{ post.get_content|safe|typogrify }}
             </div>
         </li>

@@ -71,6 +71,11 @@ a:active { color: #333333; }
   margin-bottom: 20px;
   color: #888888;
 }
+#content > ul li:hover .item-head a { color: #222222; }
+.item-head h3 a:hover { color: #ff0573 !important; }
+#content > ul li:hover .item-head h4 { color: #666666; }
+#content > ul li:hover div:last-child { color: #666666; }
+#content > ul li:hover div:last-child a { color: #0049a7; }
 .item-head {
   margin-bottom: 20px;
   border-bottom: 1px solid #ffffff;
@@ -91,6 +96,7 @@ a:active { color: #333333; }
   margin-bottom: 0;
   margin-left: 5px;
 }
+#content > ul li div:last-child a { color: #0061de; }
 .active-item .item-head h3 a { color: #222222; }
 .active-item .item-head { border-bottom: 1px dotted #666666; }
 .meta {

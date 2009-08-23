@@ -2,6 +2,8 @@
 @bg_colour: #fff;
 @main_text_colour: #333;
 @light_text_colour: #666;
+@bright_link: #ff0573;
+@feed_link: #0061de;
 
 /* mixin classes */
 .w50 { width: 50%; }
@@ -149,11 +151,26 @@ a:active {
     color: #888;
 }
 
+/* when a post-list item is hovered */
+#content > ul li:hover .item-head a {
+    color: #222;
+}
+.item-head h3 a:hover {
+    color: @bright_link !important;
+}
+#content > ul li:hover .item-head h4,
+#content > ul li:hover div:last-child {
+    color: #666;
+}
+#content > ul li:hover div:last-child a {
+    color: #0049a7;
+}
+
 
 /* the head of a feed item */
 .item-head {
     margin-bottom: 20px;
-    border-bottom: 1px solid #@background;
+    border-bottom: 1px solid @bg_colour;
 }
 .item-head h3,
 .item-head h4 {
@@ -169,6 +186,11 @@ a:active {
     float: right;
     margin-bottom: 0;
     margin-left: 5px;
+}
+
+/* the actual feed item content */
+#content > ul li div:last-child a {
+    color: @feed_link;
 }
 /* focused item in the post list */
 .active-item .item-head h3 a {
@@ -193,3 +215,4 @@ a:active {
 .meta .read button {
     background: no-repeat url(../img/bullet_toggle_plus.png);
 }
+

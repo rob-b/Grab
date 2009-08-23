@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('ul#post-list li').each(function(){
+    $('#content > ul li').each(function(){
         $(this).click(function(){
             $(this).addClass('active-item');
             $(this).siblings().removeClass('active-item');
