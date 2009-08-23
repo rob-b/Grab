@@ -55,7 +55,7 @@ def post_read(request, object_id, read=True):
         post = Post.objects.get(pk=object_id)
     except Post.DoesNotExist:
         assert False, 'What should i do?'
-    post.read = read
+    post.read = not post.read
     post.save()
     return HttpResponseRedirect(dest)
 
