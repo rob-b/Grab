@@ -8,7 +8,6 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied
 
 from functools import update_wrapper, wraps
-import markdown
 import re
 
 def rendered(func):
