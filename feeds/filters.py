@@ -11,8 +11,11 @@ def kill_guardian_tracking(kwargs):
     elems = [el for el in html.getchildren() if el.find('a') is not None]
     links = list(chain(*[elem.findall('a') for elem in elems]))
     for link in links:
-        if 'doubleclick' in link.attrib['href']:
-            link.getparent().remove(link)
+        try:
+            if 'doubleclick' in link.attrib['href']:
+                link.getparent().remove(link)
+        except KeyError:
+            pass
 
     # remove the tracking div
     divs = [div for div in html.findall('div') if 'track' in
