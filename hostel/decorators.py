@@ -63,29 +63,6 @@ def detect_cookies(f):
         }, context_instance=RequestContext(request))
     return update_wrapper(wrapper, f)
 
-def add_markdown(func, suffix='_markdown'):
-    """Decorates the save method of a model with markdown fields.
-
-    Assumes the model has fields like:
-        body = model.TextField()
-        body_markdown = model.TextField()
-    where the markdown content is entered into the body_markdown field and then
-    on saving an html version is saved to the body field. will automatically
-    populate all fields that have a corresponding _markdown field with the html
-    version of that _markdown field"""
-
-    re_suffix = r'[\w]+%s$' % suffix
-    re_suffix = re.compile(re_suffix)
-    def save_markdown(self, *args, **kwargs):
-        for field in self._meta.get_all_field_names():
-            match = re_suffix.match(field)
-            if match and hasattr(self, field.replace(suffix, '')):
-                md = markdown.Markdown(safe_mode='remove')
-                value = md.convert(getattr(self, field))
-                setattr(self, field.replace(suffix, ''), value)
-        return func(self, *args, **kwargs)
-    return update_wrapper(save_markdown, func)
-
 def access_allowed(test_func, redirect_url=None):
     """
     decorate views by making sure that passes a test function that will then
