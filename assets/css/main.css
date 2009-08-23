@@ -1,0 +1,31 @@
+h1 { font-size: 25px; }
+h2 { font-size: 23px; }
+h3 { font-size: 21px; }
+h4 { font-size: 19px; }
+h5 { font-size: 17px; }
+h6 { font-size: 15px; }
+h1, h2, h3, h4, h5 {
+  font-family: "Big Caslon", "Adobe Garamond", Garamond, Georgia, serif;
+  font-weight: normal;
+}
+#header { margin-bottom: 20px; }
+#header h1 {
+  font-size: 46px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+#header h1 a { text-decoration: none; }
+p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset { margin-bottom: 20px; }
+ol { list-style: decimal; }
+ul { list-style: square; }
+li { margin-left: 30px; }
+body {
+  background: #ffffff;
+  color: #333333;
+}
+a:link { color: #555555; }
+a:visited { color: #555555; }
+a:hover { color: #333333; }
+a:active { color: #333333; }
