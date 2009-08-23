@@ -7,12 +7,12 @@ $(document).ready(function(){
         });
         var that = $(this)
         $(this).find('a.next-item').bind('click', function(e){
-            scroll_to($(that).next().find('div:first'));
+            $(that).next().find('div:first').click();
             e.preventDefault();
             return false;
         });
         $(this).find('a.prev-item').bind('click', function(e){
-            scroll_to($(that).prev().find('div:first'));
+            $(that).prev().find('div:first').click();
             e.preventDefault();
             return false;
         });
