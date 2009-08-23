@@ -15,8 +15,6 @@
 
         <li {% if post.read %}class="read"{% endif%}>
             <div class="item-head clearfix" id="item-{{ forloop.counter }}">
-
-                {% comment %}
                 <div class="meta clearfix">
                     {{ post.updated|date:"d.M"|upper }}
                     {% if post.read %}
@@ -30,7 +28,6 @@
                     <a href="" class="prev-item">⇧</a>
                     <a href="" class="next-item">⬇</a>
                 </div>
-                {% endcomment %}
                 <h3>
                     <a href="{{ post.link }}">
                         {{ post|typogrify }}

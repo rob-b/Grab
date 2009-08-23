@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5 {
 }
 #header h1 a { text-decoration: none; }
 h2 {
-  margin-bottom: 5px;
+  margin-bottom: 5px !important;
   border-bottom: 1px solid #dddddd;
   letter-spacing: 1px;
   font-variant: small-caps;
@@ -71,6 +71,28 @@ a:active { color: #333333; }
   margin-bottom: 20px;
   color: #888888;
 }
+.item-head {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ffffff;
+}
+.item-head h3 {
+  margin-bottom: 0;
+  border-bottom: 0 solid !important;
+  letter-spacing: 1px;
+}
+.item-head h4 {
+  margin-bottom: 0;
+  border-bottom: 0 solid !important;
+  letter-spacing: 1px;
+}
+.item-head h3 a { color: #555555; }
+.item-head > div {
+  float: right;
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.active-item .item-head h3 a { color: #222222; }
+.active-item .item-head { border-bottom: 1px dotted #666666; }
 .meta {
   color: #b9b8af;
   font-size: 13px;

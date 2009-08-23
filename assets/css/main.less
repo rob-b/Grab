@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
     text-decoration: none;
 }
 h2 {
-    margin-bottom: 5px;
+    margin-bottom: 5px !important;
     border-bottom: 1px solid #ddd;
     letter-spacing: 1px;
     font-variant: small-caps;
@@ -137,6 +137,7 @@ a:active {
     margin-right: 10px;
 }
 
+/* the list of items in a feed */
 #content > ul a {
     text-decoration: none;
 }
@@ -147,6 +148,36 @@ a:active {
     margin-bottom: 20px;
     color: #888;
 }
+
+
+/* the head of a feed item */
+.item-head {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #@background;
+}
+.item-head h3,
+.item-head h4 {
+    margin-bottom: 0;
+    border-bottom: 0 solid !important;
+    letter-spacing: 1px;
+}
+/* the link in the item-head */
+.item-head h3 a{
+    color: #555 ;
+}
+.item-head > div {
+    float: right;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+/* focused item in the post list */
+.active-item .item-head h3 a {
+    color: #222;
+}
+.active-item .item-head {
+    border-bottom: 1px dotted #666;
+}
+
 
 /* meta */
 .meta {
