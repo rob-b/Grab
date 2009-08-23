@@ -108,6 +108,12 @@ ul#post-list li h2 {
     font-variant: normal;
 }
 
+.item-body > p:first-child:first-letter {
+    font-size: 34px;
+    float:left;
+    margin-right: 2px;
+}
+
 /* the head of a feed item */
 .item-head {
     margin-bottom: 20px;
