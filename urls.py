@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'', include('feeds.urls')),
+    (r'^search/', include('haystack.urls')),
 )
 
 from django.conf import settings

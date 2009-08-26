@@ -90,17 +90,19 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    # 'feedjack',
     'feeds',
     'pagination',
     'django_extensions',
     'south',
-    # 'debug_toolbar',
     'typogrify',
+    'haystack',
 )
 
 CACHE_BACKEND = 'dummy:///'
 INTERNAL_IPS = ('127.0.0.1',)
+HAYSTACK_XAPIAN_PATH = os.path.join(PROJECT_PATH, 'search_index')
+HAYSTACK_SEARCH_ENGINE = 'xapian'
+HAYSTACK_SITECONF = 'grab.search_sites'
 
 # feeds settings
 POST_FILTERS = 'feeds.filters.kill_guardian_tracking',

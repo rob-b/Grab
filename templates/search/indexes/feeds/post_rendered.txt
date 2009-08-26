@@ -1,0 +1,4 @@
+{% load typogrify %}
+<h2>{{ object.title }}</h2>
+
+{{ object.summary|safe|typogrify }}
