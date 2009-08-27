@@ -18,10 +18,14 @@ def kill_guardian_tracking(kwargs):
             pass
 
     # remove the tracking div
-    divs = [div for div in html.findall('div') if 'track' in
-            div.attrib['class']]
-    for div in divs:
-        div.getparent().remove(div)
+    try:
+        divs = [div for div in html.findall('div') if 'track' in
+                div.attrib['class']]
+    except KeyError:
+        pass
+    else:
+        for div in divs:
+            div.getparent().remove(div)
 
     # perhaps at some point it would be worth using cleaner on the html
     # cleaner = Cleaner(style=True)
