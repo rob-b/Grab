@@ -46,19 +46,3 @@
     {% paginate %}
 {% endblock %}
 
-{% block feed_list %}
-
-<h2>{% trans 'Feeds' %}</h2>
-<a href="{% url feed_add %}" class="action">
-    {% trans 'Add feed' %}
-</a>
-{% for feed in feeds %}
-    <div class="{% cycle "odd" "even" %}">
-        <h3>
-            <a href="{{ feed.get_absolute_url }}">
-                {{ feed.name }}
-            </a>
-        </h3>
-    </div>
-{% endfor %}
-{% endblock %}

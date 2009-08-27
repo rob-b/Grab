@@ -1,27 +1,26 @@
 {% extends 'base.html' %}
+{% load pagination_tags i18n typogrify %}
+
+{% block title %}{% trans 'Search Results' %}{% endblock title %}
 
 {% block content %}
-    <h2>Search</h2>
-
-    <form method="get" action=".">
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Search">
-                </td>
-            </tr>
-        </table>
-
-        {% if page.object_list %}
+    <h2>{% trans 'Search' %}</h2>
+        <ul>
+            {% autopaginate page.object_list %}
             {% for result in page.object_list %}
-                <p>
-                    {{ result.rendered|safe }}
-                </p>
+
+            <li>
+                <div class="item-head">
+                    <h3>
+                        <a href="{{ result.link }}">
+                            {{ result.title|typogrify }}
+                        </a>
+                    </h3>
+                </div>
+                <div>
+                    {{ result.summary|safe|truncatewords_html:15 }}
+                </div>
+            </li>
             {% endfor %}
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
-    </form>
+        </ul>
 {% endblock %}
