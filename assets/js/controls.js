@@ -23,6 +23,19 @@ $(document).ready(function(){
     $('form.mark-as-read').each(function(){
         $(this).ajaxForm();
     })
+
+    var input = $('#feed-list form input');
+    var default_value = input.attr('value');
+    input.focus(function(){
+        if ($(this).attr('value') == default_value){
+            $(this).attr({value: ''});
+        }
+    })
+    input.blur(function(){
+        if ($(this).attr('value') == ''){
+            $(this).attr({value: default_value});
+        }
+    })
 });
 
 var scroll_to = function(elem){
