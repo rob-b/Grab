@@ -22,6 +22,25 @@
         </div>
         <div id="feed-list">
             {% block feed_list %}
+            <h2>{% trans 'Feeds' %}</h2>
+            <form action="{% url haystack_search %}" method="get">
+                <p>
+                <input type="text" name="q" id="id_q" value="{% trans 'Search' %}">
+                </p>
+            </form>
+            <a href="{% url feed_add %}" class="action">
+                {% trans 'Add feed' %}
+            </a>
+
+            {% for feed in feeds %}
+                <div class="{% cycle "odd" "even" %}">
+                    <h3>
+                        <a href="{{ feed.get_absolute_url }}">
+                            {{ feed.name }}
+                        </a>
+                    </h3>
+                </div>
+            {% endfor %}
             {% endblock %}
         </div>
         <div id="content">
