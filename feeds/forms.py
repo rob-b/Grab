@@ -1,5 +1,6 @@
 from django import forms
 from feeds.models import Feed
+from haystack.forms import SearchForm as HaystackSearchForm
 
 class FeedForm(forms.ModelForm):
 
@@ -10,3 +11,7 @@ class FeedForm(forms.ModelForm):
 
 class ReadForm(forms.Form):
     read = forms.BooleanField(widget=forms.HiddenInput)
+
+
+class SearchForm(HaystackSearchForm):
+    pass
