@@ -124,3 +124,7 @@ a:active { color: #333333; }
   background: no-repeat url(../img/bullet_toggle_minus.png);
 }
 .meta .read button { background: no-repeat url(../img/bullet_toggle_plus.png); }
+label {
+  float: left;
+  width: 100px;
+}
