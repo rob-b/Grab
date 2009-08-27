@@ -24,7 +24,10 @@ def populate_feed(feed_obj):
         feed_obj.title = item.feed.title
         feed_obj.link = item.feed.link
         feed_obj.etag = item.etag
-        feed_obj.tagline = item.feed.tagline
+        try:
+            feed_obj.tagline = item.feed.tagline
+        except AttributeError:
+            feed_obj.tagline = u''
         try:
             feed_obj.updated = mtime(item.modified)
         except AttributeError:
