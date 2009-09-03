@@ -15,11 +15,17 @@
                         <a href="{{ result.link }}">
                             {{ result.title|typogrify }}
                         </a>
+                        ★
+                        {{ result.object.feed.name }}
                     </h3>
                 </div>
                 <div>
                     {{ result.summary|safe|truncatewords_html:15 }}
                 </div>
+
+                {% comment %}
+                {{ result.rendered|safe }}
+                {% endcomment %}
             </li>
             {% endfor %}
         </ul>
