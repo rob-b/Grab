@@ -1,24 +1,27 @@
 $(document).ready(function(){
-    $('#content > ul li').each(function(){
-        $(this).click(function(){
-            $(this).addClass('active-item read');
-            $(this).siblings().removeClass('active-item');
-            scroll_to($(this));
-
-            $(this).find('form.mark-as-read').submit();
-        });
-
-        var that = $(this)
-        $(this).find('a.next-item').bind('click', function(e){
-            $(that).next().find('div:first').click();
+    $('#content > ul').click(function(e){
+        var li, target = $(e.target);
+        if (target.is('a.next-item')) {
+            target.parents('li:first').next().click();
             e.preventDefault();
             return false;
-        });
-        $(this).find('a.prev-item').bind('click', function(e){
-            $(that).prev().find('div:first').click();
+        }
+        else if (target.is('a.prev-item')) {
+            target.parents('li:first').prev().click();
             e.preventDefault();
             return false;
-        });
+        }
+        else if (target.is('#content > ul li')) {
+            li = target;
+        }
+        else if (target.parents('li').length) {
+            li = target.parents('li:first');
+        }
+        li.addClass('active-item read');
+        li.siblings().removeClass('active-item');
+        scroll_to(li);
+
+        li.find('form.mark-as-read').submit();
     });
     $('form.mark-as-read').each(function(){
         $(this).ajaxForm();
