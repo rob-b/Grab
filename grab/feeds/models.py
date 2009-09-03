@@ -77,6 +77,7 @@ class Post(models.Model):
         verbose_name_plural = _('posts')
         ordering = ('-updated',)
         unique_together = (('feed', 'link'),)
+        get_latest_by = 'created'
 
     def __unicode__(self):
         return self.title
