@@ -1,5 +1,7 @@
 $(document).ready(function(){
+    var delay;
     $('#content > ul').click(function(e){
+        clearTimeout(delay);
         var li, target = $(e.target);
         if (target.is('a.next-item')) {
             target.parents('li:first').next().click();
@@ -17,11 +19,18 @@ $(document).ready(function(){
         else if (target.parents('li').length) {
             li = target.parents('li:first');
         }
-        li.addClass('active-item read');
-        li.siblings().removeClass('active-item');
-        scroll_to(li);
 
-        li.find('form.mark-as-read').submit();
+        if (target.is('a')) {
+            e.preventDefault();
+            activate_item(li);
+            delay = setTimeout(function(){
+                window.location = target.attr('href');
+            }, 1500);
+            return false;
+        }
+        else{
+            activate_item(li);
+        }
     });
     $('form.mark-as-read').each(function(){
         $(this).ajaxForm();
@@ -40,6 +49,13 @@ $(document).ready(function(){
         }
     })
 });
+
+var activate_item = function(obj) {
+    obj.addClass('active-item read');
+    obj.siblings().removeClass('active-item');
+    obj.find('form.mark-as-read').submit();
+    scroll_to(obj);
+}
 
 var scroll_to = function(elem){
     var target_offset = elem.offset().top;
