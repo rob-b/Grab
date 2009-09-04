@@ -7,6 +7,7 @@ from feeds.forms import FeedForm, ReadForm
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.decorators.http import require_POST
+from django.core.urlresolvers import reverse
 
 @rendered
 def feed_list(request, all_posts=False):
@@ -23,6 +24,7 @@ def feed_detail(request, object_id, update=False, all_posts=False):
 
     if update:
         populate_feed(feed)
+        return HttpResponseRedirect(reverse('feed_detail', args=[object_id]))
     if not all_posts:
         posts = Post.objects.unread().filter(feed=feed.id)
     else:
