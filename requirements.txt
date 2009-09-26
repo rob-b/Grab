@@ -5,3 +5,4 @@ smartypants
 -e svn+http://typogrify.googlecode.com/svn/trunk/#egg=typogrify
 -e svn+http://django-pagination.googlecode.com/svn/trunk/#egg=pagination
 -e svn+http://svn.aeracode.org/svn/south/trunk#egg=south
+-e git://github.com/rob-b/sorl-thumbnail.git#egg=sorl
