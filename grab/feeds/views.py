@@ -1,6 +1,5 @@
 from hostel.decorators import rendered
 from feeds.models import Feed, Post
-from feeds.tools import FeedProcessor
 from feeds.tools import populate_feed
 from feeds.forms import FeedForm, ReadForm
 

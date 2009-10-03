@@ -5,9 +5,9 @@ from django.utils import importlib
 import feedparser
 from datetime import datetime
 import time
-import sys
 import shelve
 from feedcache import cache
+import os.path
 
 def mtime(timetuple):
     modified = list(timetuple[0:8]) + [-1]
@@ -16,7 +16,7 @@ def mtime(timetuple):
 def populate_feed(feed_obj):
 
     # this is not threadsafe and will likely break on a real server
-    storage = shelve.open(feed_obj.name)
+    storage = shelve.open(os.path.join('./cache', feed_obj.name))
     try:
         fc = cache.Cache(storage)
         item = fc.fetch(feed_obj.feed_url)
