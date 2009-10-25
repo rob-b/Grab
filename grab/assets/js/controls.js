@@ -24,7 +24,8 @@ $(document).ready(function(){
             e.preventDefault();
             activate_item(li);
             delay = setTimeout(function(){
-                window.location = target.attr('href');
+                // window.location = target.attr('href');
+                window.open(target.attr('href'));
             }, 1500);
             return false;
         }
@@ -54,6 +55,14 @@ $(document).ready(function(){
         size: 4,
         speed: 700,
     }).mousewheel();
+
+    // $('a[rel=popup]').each(function(){
+    //     var that = $(this);
+    //     that.click(function(){
+    //         window.open(that.attr('href'));
+    //         return false;
+    //     });
+    // });
 });
 
 var activate_item = function(obj) {
