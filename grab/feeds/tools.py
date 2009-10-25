@@ -20,10 +20,9 @@ def populate_feed(feed_obj):
     try:
         fc = cache.Cache(storage)
         item = fc.fetch(feed_obj.feed_url)
-        # item = feedparser.parse(feed_obj.feed_url)
         feed_obj.title = item.feed.title
         feed_obj.link = item.feed.link
-        feed_obj.etag = item.etag
+        feed_obj.etag = item.etag or u''
         try:
             feed_obj.tagline = item.feed.tagline
         except AttributeError:
@@ -31,8 +30,9 @@ def populate_feed(feed_obj):
         try:
             feed_obj.updated = mtime(item.modified)
         except AttributeError:
-            feed_obj.updated = None
+            feed_obj.updated = datetime.now()
         feed_obj.last_checked = datetime.now()
+        feed_obj.save()
 
         # we reverse the list because some feeds do not have modified date for
         # the entries and so will end up with modified stamps that we generate.
