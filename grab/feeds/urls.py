@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import *
-from django.views.generic.list_detail import object_detail
 
-from feeds.views import feed_list, feed_detail, feed_add
+from feeds.views import feed_add
 from feeds.models import Feed
 
 feed_dict = {
@@ -14,12 +13,12 @@ urlpatterns = patterns('feeds.views',
     url(r'^$', 'feed_list', name="home"),
     url(r'^all/$', 'feed_list', {'all_posts': True}, name="feeds_home_all"),
 
-    url(r'^(?P<object_id>[\d]+)/$', 'feed_detail', name="feed_detail"),
-    url(r'^(?P<object_id>[\d]+)/all/$',
+    url(r'^(?P<name>[^/]+)/$', 'feed_detail', name="feed_detail"),
+    url(r'^(?P<name>[^/]+)/all/$',
         'feed_detail',
         {'all_posts': True},
         name="feed_detail_all"),
-    (r'(?P<object_id>[\d]+)/fresh/$',
+    (r'(?P<name>[^/]+)/fresh/$',
      'feed_detail',
      {'update':True}),
 

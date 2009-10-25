@@ -57,7 +57,7 @@ class Feed(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('feed_detail', [str(self.pk)])
+        return ('feed_detail', [self.name])
 
 class Post(models.Model):
     feed = models.ForeignKey('Feed', verbose_name=_('feed'))
