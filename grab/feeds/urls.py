@@ -9,8 +9,11 @@ feed_dict = {
     'template_object_name': 'feed',
 }
 
-urlpatterns = patterns('feeds.views',
-    url(r'^$', 'feed_list', name="home"),
+home = lambda x: redirect('home', permanent=True)
+urlpatterns = patterns('',
+    url(r'^$', home),
+)
+urlpatterns += patterns('feeds.views',
     url(r'^all/$', 'feed_list', {'all_posts': True}, name="feeds_home_all"),
 
     url(r'^add/$', feed_add, name='feed_add'),
@@ -21,12 +24,12 @@ urlpatterns = patterns('feeds.views',
         'post_unread',
         name='feeds_post_unread'),
 
-    url(r'^(?P<name>[^/]+)/$', 'feed_detail', name="feed_detail"),
-    url(r'^(?P<name>[^/]+)/all/$',
+    url(r'^(?P<slug>[-\w]+)/$', 'feed_detail', name="feed_detail"),
+    url(r'^(?P<slug>[^/]+)/all/$',
         'feed_detail',
         {'all_posts': True},
         name="feed_detail_all"),
-    (r'(?P<name>[^/]+)/fresh/$',
+    (r'(?P<slug>[^/]+)/fresh/$',
      'feed_detail',
      {'update':True}),
 

@@ -17,13 +17,13 @@ def feed_list(request, all_posts=False):
     }
 
 @rendered
-def feed_detail(request, name, update=False, all_posts=False):
-    feed = get_object_or_404(Feed, name=name)
+def feed_detail(request, slug, update=False, all_posts=False):
+    feed = get_object_or_404(Feed, slug=slug)
     feed_status = False
 
     if update:
         populate_feed(feed)
-        return HttpResponseRedirect(reverse('feed_detail', args=[name]))
+        return HttpResponseRedirect(reverse('feed_detail', args=[slug]))
     if not all_posts:
         posts = Post.objects.unread().filter(feed=feed.id)
     else:

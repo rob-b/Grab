@@ -1,9 +1,14 @@
 from django.conf.urls.defaults import *
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'feeds.views.feed_list', name='home'),
     (r'^search/', include('search.urls')),
-    (r'', include('feeds.urls')),
+    (r'^feeds/', include('feeds.urls')),
+    (r'^admin/', include(admin.site.urls)),
 )
+
 
 from django.conf import settings
 if settings.DEBUG:
