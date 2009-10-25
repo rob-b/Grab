@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django_extensions.db.fields import AutoSlugField
 
 from tools import populate_feed
 from managers import PostManager
-import feedparser
 
 
 class Site(models.Model):
@@ -30,6 +30,8 @@ class Feed(models.Model):
     feed_url = models.URLField(_('feed url'), unique=True)
 
     name = models.CharField(_('name'), max_length=100)
+    slug = AutoSlugField(_('Slug'), populate_from='name',
+                         editable=True, overwrite=False)
     is_active = models.BooleanField(_('is active'),
                                     default=True,
                                     help_text=_('If disabled, this feed will\
@@ -40,7 +42,7 @@ class Feed(models.Model):
     link = models.URLField(_('link'), max_length=255, blank=True)
 
     # http://feedparser.org/docs/http-etag.html
-    etag = models.CharField(_('etag'), max_length=50, blank=True, null=True)
+    etag = models.CharField(_('etag'), max_length=50, blank=True)
     updated = models.DateTimeField(_('last modified'), null=True, blank=True)
     last_checked = models.DateTimeField(_('last checked'), null=True, blank=True)
 
@@ -57,7 +59,7 @@ class Feed(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('feed_detail', [self.name])
+        return ('feed_detail', [self.slug])
 
 class Post(models.Model):
     feed = models.ForeignKey('Feed', verbose_name=_('feed'))
