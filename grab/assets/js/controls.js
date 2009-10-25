@@ -48,6 +48,12 @@ $(document).ready(function(){
             $(this).attr({value: default_value});
         }
     })
+
+    $('#scrollable').scrollable({
+        vertical: true,
+        size: 4,
+        speed: 700,
+    }).mousewheel();
 });
 
 var activate_item = function(obj) {
@@ -59,5 +65,5 @@ var activate_item = function(obj) {
 
 var scroll_to = function(elem){
     var target_offset = elem.offset().top;
-    $('html,body').animate({scrollTop: target_offset}, 1000);
+    $('html,body').animate({scrollTop: target_offset}, {duration: 1000, easing: 'swing'} );
 }

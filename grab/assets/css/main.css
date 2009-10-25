@@ -69,6 +69,16 @@ a:active { color: #333333; }
   margin-bottom: 5px;
 }
 #feed-list h3 { margin-bottom: 0; }
+#feed-list h3 a { background-color: #fff80a; }
+#scrollable {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+#feed-list .items {
+  position: absolute;
+  height: 2000em;
+}
 #content {
   float: left;
   display: inline;
