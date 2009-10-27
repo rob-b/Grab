@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
 from tools import populate_feed
-from managers import PostManager
+from managers import PostManager, FeedManager
 
 
 class Site(models.Model):
@@ -22,9 +22,6 @@ class Site(models.Model):
     def __unicode__(self):
         return u'%s' % self.name
 
-
-class FeedManager(models.Manager):
-    pass
 
 class Feed(models.Model):
     feed_url = models.URLField(_('feed url'), unique=True)
