@@ -64,12 +64,30 @@ a:active { color: #333333; }
   margin-top: 10px;
   text-decoration: underline;
 }
-#feed-list h2 + a + div {
-  clear: left;
-  margin-bottom: 5px;
+#feed-list h3 {
+  margin-bottom: 0;
+  margin-right: 3px;
+  float: left;
 }
-#feed-list h3 { margin-bottom: 0; }
 #feed-list h3 a { background-color: #fff80a; }
+.odd > ul {
+  margin: 0;
+  font-size: 0.8em;
+}
+.even > ul {
+  margin: 0;
+  font-size: 0.8em;
+}
+.odd > ul li {
+  margin: 0;
+  list-style-type: none;
+  display: inline;
+}
+.even > ul li {
+  margin: 0;
+  list-style-type: none;
+  display: inline;
+}
 #scrollable {
   position: relative;
   overflow: hidden;
@@ -78,6 +96,7 @@ a:active { color: #333333; }
 #feed-list .items {
   position: absolute;
   height: 2000em;
+  width: 100%;
 }
 #content {
   float: left;
@@ -138,3 +157,13 @@ label {
   float: left;
   width: 100px;
 }
+.clearfix:after {
+  clear: both;
+  content: '.';
+  display: block;
+  visibility: hidden;
+  height: 0;
+}
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }

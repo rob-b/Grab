@@ -11,7 +11,7 @@
         <script src="{{ MEDIA_URL }}js/jquery.tools.min.js" type="text/javascript"></script>
         <script src="{{ MEDIA_URL }}js/controls.js" type="text/javascript"></script>
         {% endblock %}
-        <title>{% trans 'GRAB' %}: {% block title %}{% endblock %}</title>
+        <title>{% block title %}{% endblock %} ★ {% trans 'GRAB' %}</title>
     </head>
     <body>
         <div id="header">
@@ -34,17 +34,22 @@
             </a>
 
             <div id="scrollable">
-            <div class="items">
-            {% for feed in feeds %}
-                <div class="{% cycle "odd" "even" %}">
-                    <h3>
-                        <a href="{{ feed.get_absolute_url|iriencode }}">
-                            {{ feed.name }}
-                        </a>
-                    </h3>
+                <div class="items">
+                {% for feed in feeds %}
+                    <div class="clearfix {% cycle "odd" "even" %}">
+                        <h3>
+                            <a href="{{ feed.get_absolute_url|iriencode }}">
+                                {{ feed.name }}
+                            </a>
+                        </h3>
+                        <ul>
+                            <li>
+                                ({{ feed.unread_posts_count }})
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
                 </div>
-            {% endfor %}
-            </div>
             </div>
             {% endblock %}
         </div>

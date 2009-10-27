@@ -140,15 +140,30 @@ a:active {
     margin-top: 10px;
     text-decoration: underline;
 }
-#feed-list h2 + a + div {
-    clear: left;
-    margin-bottom: 5px;
+/* of the feed list feed items */
+div.items > div {
+    /* clear: left; */
+    /* margin-bottom: 5px; */
 }
 #feed-list h3 {
     margin-bottom: 0;
+    margin-right: 3px;
+    float: left;
 }
 #feed-list h3 a {
     background-color: #fff80a;
+}
+
+.odd > ul,
+.even > ul {
+    margin: 0;
+    font-size: 0.8em;
+}
+.odd > ul li,
+.even > ul li {
+    margin: 0;
+    list-style-type: none;
+    display: inline;
 }
 
 #scrollable {
@@ -159,6 +174,7 @@ a:active {
 #feed-list .items {
     position: absolute;
     height: 2000em;
+    width: 100%;
 }
 
 /* right hand side column; list of items in a feed */
@@ -255,3 +271,20 @@ label {
     width: 100px;
 }
 
+/* http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+    clear: both;
+    content: '.';
+    display: block;
+    visibility: hidden;
+    height: 0;
+}
+.clearfix {
+    display: inline-block;
+}
+* html .clearfix {
+    height: 1%;
+}
+.clearfix {
+    display: block;
+}
