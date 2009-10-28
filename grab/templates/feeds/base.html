@@ -17,12 +17,15 @@
             <div class="item-head clearfix" id="item-{{ forloop.counter }}">
                 <div class="meta clearfix">
                     {{ post.updated|date:"d.M"|upper }}
+
+                    {% comment %}
                     <form action="{% url feeds_post_read post.pk %}" method="post" class="mark-as-read{% if post.read %} read{% endif %}">
                         {{ form }}
                         <p>
                             <button type="submit">{% trans 'Mark as read' %}</button>
                         </p>
                     </form>
+                    {% endcomment %}
                     <a href="" class="prev-item">⇧</a>
                     <a href="" class="next-item">⬇</a>
                 </div>
