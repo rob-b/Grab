@@ -37,7 +37,7 @@ ol { list-style: decimal; }
 ul { list-style: square; }
 li { margin-left: 30px; }
 body {
-  background: #fff80a;
+  background: #ffffff;
   color: #222222;
   font: 0.8125em/1.5 Geneva, "Lucida Sans", Verdana, sans-serif;
   width: 960px;
@@ -110,7 +110,7 @@ a:active { color: #333333; }
   margin-left: 0;
   list-style-type: none;
   margin-bottom: 20px;
-  color: #333333;
+  color: #444444;
 }
 #content > ul li:hover .item-head a { color: #222222; }
 .item-head h3 a:hover { color: #ff0573 !important; }
@@ -119,7 +119,7 @@ a:active { color: #333333; }
 #content > ul li:hover div:last-child a { color: #0049a7; }
 .item-head {
   margin-bottom: 20px;
-  border-bottom: 1px solid #fff80a;
+  border-bottom: 1px solid #ffffff;
 }
 .item-head h3 {
   margin-bottom: 0;
@@ -131,7 +131,7 @@ a:active { color: #333333; }
   border-bottom: 0 solid !important;
   letter-spacing: 1px;
 }
-.item-head h3 a { color: #333333; }
+.item-head h3 a { color: #444444; }
 .item-head > div {
   float: right;
   margin-bottom: 0;
