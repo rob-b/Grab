@@ -1,7 +1,9 @@
 /* setup some constants */
-@bg_colour: #fff;
-@main_text_colour: #333;
-@light_text_colour: #666;
+@bg_colour: #fff80a;
+@main_text_colour: #222;
+@light_text_colour: #444;
+@feed_detail_colour: #222;
+@feed_detail_colour_unfocused: #333;
 @bright_link: #ff0573;
 @feed_link: #0061de;
 
@@ -15,7 +17,7 @@
     *margin-left: -0.04em;
 }
 .grey_border {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #2a2a2a;
 }
 
 /* heading sizes */
@@ -63,7 +65,6 @@ h1, h2, h3, h4, h5 {
 }
 h2 {
     margin-bottom: 5px !important;
-    border-bottom: 1px solid #ddd;
     letter-spacing: 1px;
     font-variant: small-caps;
     .grey_border;
@@ -194,7 +195,7 @@ div.items > div {
     margin-left: 0;
     list-style-type: none;
     margin-bottom: 20px;
-    color: #888;
+    color: @feed_detail_colour_unfocused;
 }
 
 /* when a post-list item is hovered */
@@ -206,7 +207,7 @@ div.items > div {
 }
 #content > ul li:hover .item-head h4,
 #content > ul li:hover div:last-child {
-    color: #666;
+    color: @feed_detail_colour;
 }
 #content > ul li:hover div:last-child a {
     color: #0049a7;
@@ -226,7 +227,7 @@ div.items > div {
 }
 /* the link in the item-head */
 .item-head h3 a{
-    color: #555 ;
+    color: @feed_detail_colour_unfocused ;
 }
 .item-head > div {
     float: right;
@@ -237,6 +238,13 @@ div.items > div {
 /* the actual feed item content */
 #content > ul li div:last-child a {
     color: @feed_link;
+}
+#content > ul li ul {
+    list-style-type: square;
+    margin-left: 25px;
+}
+#content > ul li ul li {
+    list-style-type: square;
 }
 /* focused item in the post list */
 .active-item .item-head h3 a {

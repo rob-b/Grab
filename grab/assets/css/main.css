@@ -6,7 +6,7 @@
   display: inline;
   *margin-left: -0.04em;
 }
-.grey_border { border-bottom: 1px solid #dddddd; }
+.grey_border { border-bottom: 1px solid #2a2a2a; }
 h1 { font-size: 25px; }
 h2 { font-size: 23px; }
 h3 { font-size: 21px; }
@@ -28,18 +28,17 @@ h1, h2, h3, h4, h5 {
 #header h1 a { text-decoration: none; }
 h2 {
   margin-bottom: 5px !important;
-  border-bottom: 1px solid #dddddd;
   letter-spacing: 1px;
   font-variant: small-caps;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #2a2a2a;
 }
 p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset { margin-bottom: 20px; }
 ol { list-style: decimal; }
 ul { list-style: square; }
 li { margin-left: 30px; }
 body {
-  background: #ffffff;
-  color: #333333;
+  background: #fff80a;
+  color: #222222;
   font: 0.8125em/1.5 Geneva, "Lucida Sans", Verdana, sans-serif;
   width: 960px;
   margin: 0 auto;
@@ -111,16 +110,16 @@ a:active { color: #333333; }
   margin-left: 0;
   list-style-type: none;
   margin-bottom: 20px;
-  color: #888888;
+  color: #333333;
 }
 #content > ul li:hover .item-head a { color: #222222; }
 .item-head h3 a:hover { color: #ff0573 !important; }
-#content > ul li:hover .item-head h4 { color: #666666; }
-#content > ul li:hover div:last-child { color: #666666; }
+#content > ul li:hover .item-head h4 { color: #222222; }
+#content > ul li:hover div:last-child { color: #222222; }
 #content > ul li:hover div:last-child a { color: #0049a7; }
 .item-head {
   margin-bottom: 20px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid #fff80a;
 }
 .item-head h3 {
   margin-bottom: 0;
@@ -132,13 +131,18 @@ a:active { color: #333333; }
   border-bottom: 0 solid !important;
   letter-spacing: 1px;
 }
-.item-head h3 a { color: #555555; }
+.item-head h3 a { color: #333333; }
 .item-head > div {
   float: right;
   margin-bottom: 0;
   margin-left: 5px;
 }
 #content > ul li div:last-child a { color: #0061de; }
+#content > ul li ul {
+  list-style-type: square;
+  margin-left: 25px;
+}
+#content > ul li ul li { list-style-type: square; }
 .active-item .item-head h3 a { color: #222222; }
 .active-item .item-head { border-bottom: 1px dotted #666666; }
 .meta {
