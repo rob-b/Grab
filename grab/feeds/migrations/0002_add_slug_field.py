@@ -8,12 +8,7 @@ class Migration:
     def forwards(self, orm):
         
         # Adding field 'Feed.slug'
-        db.add_column('feeds_feed',
-                      'slug',
-                      AutoSlugField(_('Slug'),
-                                    populate_from='name',
-                                    default=""),
-                      keep_default=False)
+        db.add_column('feeds_feed', 'slug', AutoSlugField(_('Slug'), populate_from='name'))
         
     
     
