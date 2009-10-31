@@ -37,7 +37,7 @@ ol { list-style: decimal; }
 ul { list-style: square; }
 li { margin-left: 30px; }
 body {
-  background: #fff80a;
+  background: #ffffff;
   color: #222222;
   font: 0.8125em/1.5 Geneva, "Lucida Sans", Verdana, sans-serif;
   width: 960px;
@@ -119,7 +119,7 @@ a:active { color: #333333; }
 #content > ul li:hover div:last-child a { color: #0049a7; }
 .item-head {
   margin-bottom: 20px;
-  border-bottom: 1px solid #fff80a;
+  border-bottom: 1px solid #ffffff;
 }
 .item-head h3 {
   margin-bottom: 0;
