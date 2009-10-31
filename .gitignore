@@ -3,3 +3,4 @@
 settings_local.py
 search_index
 cache
+grab.db
