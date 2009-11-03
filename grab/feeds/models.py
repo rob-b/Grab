@@ -37,6 +37,7 @@ class Feed(models.Model):
     title = models.CharField(_('title'), max_length=200, blank=True)
     tagline = models.TextField(_('tagline'), blank=True)
     link = models.URLField(_('link'), max_length=255, blank=True)
+    favicon = models.ImageField(_('Favicon'), upload_to='favicons')
 
     # http://feedparser.org/docs/http-etag.html
     etag = models.CharField(_('etag'), max_length=50, blank=True)
@@ -57,6 +58,7 @@ class Feed(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('feed_detail', [self.slug])
+
 
 class Post(models.Model):
     feed = models.ForeignKey('Feed', verbose_name=_('feed'))
