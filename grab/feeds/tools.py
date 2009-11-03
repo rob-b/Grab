@@ -11,9 +11,12 @@ import os.path
 from urllib import urlretrieve
 from feeds.templatetags.feed_extras import feed_favicon
 
-def get_favicon(feed):
+def get_favicon(feed_or_url):
     """Dowload the favicon of a feed"""
-    url = feed_favicon(feed)
+    try:
+        url = feed_favicon(feed_or_url)
+    except AttributeError:
+        url = feed_or_url
     fn, headers = urlretrieve(url)
     return fn
 

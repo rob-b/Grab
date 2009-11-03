@@ -6,6 +6,7 @@ from django_extensions.db.fields import AutoSlugField
 from feeds.tools import populate_feed
 from feeds.tools import get_favicon
 from managers import PostManager, FeedManager
+from hostel.storage import AttachmentStorage
 
 
 class Site(models.Model):
@@ -39,7 +40,9 @@ class Feed(models.Model):
     title = models.CharField(_('title'), max_length=200, blank=True)
     tagline = models.TextField(_('tagline'), blank=True)
     link = models.URLField(_('link'), max_length=255, blank=True)
-    favicon = models.ImageField(_('Favicon'), upload_to='favicons')
+    favicon = models.ImageField(_('Favicon'),
+                                storage=AttachmentStorage(overwrite=True),
+                                upload_to='favicons')
 
     # http://feedparser.org/docs/http-etag.html
     etag = models.CharField(_('etag'), max_length=50, blank=True)
