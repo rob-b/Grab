@@ -39,13 +39,14 @@
                 {% for feed in feeds %}
                     <div class="clearfix {% cycle "odd" "even" %}">
                         <h3>
+                            <img src="{{ feed.favicon.url }}">
                             <a href="{{ feed.get_absolute_url|iriencode }}">
                                 {{ feed.name }}
                             </a>
                         </h3>
                         <ul>
                             <li>
-                                ({{ feed.unread_posts_count }})
+                            ({{ feed.unread_posts_count }}) 
                             </li>
                         </ul>
                     </div>
