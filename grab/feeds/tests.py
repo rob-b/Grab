@@ -1,10 +1,9 @@
 from django.test import TestCase
 from models import Feed, Post
-from tools import create_post, entry_to_post_args, populate_feed
+from tools import entry_to_post_args
 
 import shelve
 from feedcache import cache
-import feedparser
 
 class FeedTests(TestCase):
 
