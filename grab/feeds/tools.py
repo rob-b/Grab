@@ -8,6 +8,14 @@ import time
 import shelve
 from feedcache import cache
 import os.path
+from urllib import urlretrieve
+from feeds.templatetags.feed_extras import feed_favicon
+
+def get_favicon(feed):
+    """Dowload the favicon of a feed"""
+    url = feed_favicon(feed)
+    fn, headers = urlretrieve(url)
+    return fn
 
 def mtime(timetuple):
     modified = list(timetuple[0:8]) + [-1]

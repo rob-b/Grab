@@ -1,8 +1,10 @@
 from django.db import models
+from django.core.files import File
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
-from tools import populate_feed
+from feeds.tools import populate_feed
+from feeds.tools import get_favicon
 from managers import PostManager, FeedManager
 
 
@@ -91,7 +93,12 @@ class Post(models.Model):
         return self.content or self.summary
 
 # signals
-def feed_creation(sender, **kwargs):
-    if kwargs.get('created'):
-        populate_feed(kwargs['instance'])
+def feed_creation(sender, instance, created, **kwargs):
+    if created:
+        populate_feed(instance)
+    try:
+        instance.favicon.url
+    except ValueError:
+        fo = File(open(get_favicon(instance)))
+        instance.favicon.save(instance.slug+'.gif', fo, save=True)
 models.signals.post_save.connect(feed_creation, sender=Feed)
