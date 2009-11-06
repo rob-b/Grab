@@ -8,7 +8,7 @@ class PostManager(models.Manager):
 
 class FeedManager(models.Manager):
     def get_query_set(self):
-        return super(FeedManager, self).get_query_set().filter(
-            post__read=False
-        ).annotate(unread_posts_count=models.Count('post'))
+        return super(FeedManager, self).get_query_set().annotate(
+            unread_posts_count=models.Count('post')
+        )
 

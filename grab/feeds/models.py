@@ -7,6 +7,8 @@ from feeds.tools import populate_feed
 from feeds.tools import get_favicon
 from managers import PostManager, FeedManager
 from hostel.storage import AttachmentStorage
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
 class Site(models.Model):
@@ -63,6 +65,19 @@ class Feed(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('feed_detail', [self.slug])
+
+    @property
+    def unread(self):
+        try:
+            return self._unread
+        except AttributeError:
+            now = datetime.now()
+            then = now + relativedelta(days=-2)
+            setattr(self, '_unread', self.post_set.filter(
+                read=False,
+                created__range=(then, now),
+            ).count())
+            return self._unread
 
 
 class Post(models.Model):
