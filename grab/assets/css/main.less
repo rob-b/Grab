@@ -179,12 +179,18 @@ div.items > div {
     width: 100%;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
 /* right hand side column; list of items in a feed */
 #content {
     .block;
     width: 620px;
     margin-left: 10px;
     margin-right: 10px;
+    overflow-y: scroll;
+    height: 80%;
 }
 
 /* the list of items in a feed */

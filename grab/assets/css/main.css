@@ -97,6 +97,10 @@ a:active { color: #333333; }
   height: 2000em;
   width: 100%;
 }
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
 #content {
   float: left;
   display: inline;
@@ -104,6 +108,8 @@ a:active { color: #333333; }
   width: 620px;
   margin-left: 10px;
   margin-right: 10px;
+  overflow-y: scroll;
+  height: 80%;
 }
 #content > ul a { text-decoration: none; }
 #content > ul li {
