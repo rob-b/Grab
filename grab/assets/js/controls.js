@@ -2,6 +2,7 @@ $(document).ready(function(){
 
     search_form.init();
     item_action.init();
+    img_size.init();
 
     $('form.mark-as-read').ajaxForm();
     $('#scrollable').scrollable({
@@ -58,13 +59,19 @@ var item_action = {
                 e.preventDefault();
                 return false;
             }
+
+            /* if we've clicked an <li> then use that as the target... */
             else if (target.is('#content > ul li')) {
                 li = target;
             }
+            /* ...otherwise find its first parent <li> and use that */
             else if (target.parents('li').length) {
                 li = target.parents('li:first');
             }
 
+            /* if we've clicked a link then don't open the location
+             * straightaway; instead activate the item and *then* open the
+             * location in a new window */
             if (target.is('a')) {
                 e.preventDefault();
                 item_action.activate_item(li);
@@ -74,9 +81,24 @@ var item_action = {
                 }, 1500);
                 return false;
             }
-            else{
+
+            /* if this li is not already the active-item then make it the
+             * active-item */
+            if (!li.hasClass('active-item')) {
                 item_action.activate_item(li);
             }
         });
+    }
+}
+
+var img_size = {
+    init: function(){
+        $('#content img').each(function(){
+            var im = $(this);
+            if (im.attr('width') > 599){
+                im.addClass('large-image');
+            }
+            console.log(im.attr('width')+' '+im.attr('src'));
+        })
     }
 }
