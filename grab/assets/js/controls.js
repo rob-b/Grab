@@ -34,11 +34,14 @@ var item_action = {
         obj.addClass('active-item read');
         obj.siblings().removeClass('active-item');
         obj.find('form.mark-as-read').submit();
-        item_action.scroll_to(obj);
+        // item_action.scroll_to(obj);
+        $('#content').scrollTo(obj, {duration:1500, easing: 'easeOutExpo'});
     },
     scroll_to: function(elem){
         var target_offset = elem.offset().top;
-        $('html,body').animate({scrollTop: target_offset}, {duration:1500, easing: 'easeOutExpo'} );
+        $('#content').animate({scrollTop: target_offset}, {duration:1500, easing: 'easeOutExpo'} );
+        console.log(target_offset);
+        console.log($('#content').attr('scrollTop'));
     },
     init: function(){
         var delay;
