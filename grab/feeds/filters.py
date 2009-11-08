@@ -1,6 +1,7 @@
 from lxml import etree
 from lxml.html import fromstring
-from lxml.html.clean import Cleaner
+from lxml.html import builder as E
+from lxml.html import tostring
 from itertools import chain
 
 def kill_guardian_tracking(kwargs):
@@ -28,7 +29,23 @@ def kill_guardian_tracking(kwargs):
             div.getparent().remove(div)
 
     # perhaps at some point it would be worth using cleaner on the html
+    # from lxml.html.clean import Cleaner
     # cleaner = Cleaner(style=True)
     # kwargs['summary'] = cleaner.clean_html(etree.tostring(html))
-    kwargs['summary'] = etree.tostring(html)
+    kwargs['summary'] = tostring(html)
+    return kwargs
+
+def correct_guardian_lists(kwargs):
+    summary = kwargs['summary']
+    html = fromstring(summary)
+
+    # get an iterator of all elems with a class
+    elems = [elem for elem in html if 'class' in elem.attrib and
+             elem.attrib['class'] == 'standfirst']
+
+    for elem in elems:
+        bits = [el.strip() for el in elem.text_content().split(u'\u2022') if el]
+        ul = E.UL(*[E.LI(bit) for bit in bits])
+        html.replace(elem, ul)
+    kwargs['summary'] = tostring(html)
     return kwargs

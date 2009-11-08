@@ -108,7 +108,11 @@ HAYSTACK_SEARCH_ENGINE = 'xapian'
 HAYSTACK_SITECONF = 'grab.search_sites'
 
 # feeds settings
-POST_FILTERS = 'feeds.filters.kill_guardian_tracking',
+POST_FILTERS = (
+    'feeds.filters.kill_guardian_tracking',
+    'feeds.filters.correct_guardian_lists',
+)
+FEED_UPDATE_TIME = 15
 
 try:
     from settings_local import *
