@@ -123,6 +123,7 @@ html, body {
 #content > ul li:hover .item-head h4 { color: #222222; }
 #content > ul li:hover div:last-child { color: #222222; }
 #content > ul li:hover div:last-child a { color: #0049a7; }
+.large-image { width: 600px; }
 .item-head {
   margin-bottom: 20px;
   border-bottom: 1px solid #ffffff;
