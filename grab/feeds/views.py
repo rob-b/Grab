@@ -4,7 +4,7 @@ from feeds.tools import populate_feed
 from feeds.forms import FeedForm, ReadForm
 
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
 
@@ -58,6 +58,8 @@ def post_read(request, object_id, read=True):
         assert False, 'What should i do?'
     post.read = not post.read
     post.save()
+    if request.is_ajax():
+        return HttpResponse('%s is now %s' % (post, post.read))
     return HttpResponseRedirect(dest)
 
 def post_unread(request, object_id):
