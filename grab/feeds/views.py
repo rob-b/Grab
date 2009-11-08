@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
+from django.conf import settings
+from datetime import datetime
 
 @rendered
 def feed_list(request, all_posts=False):
@@ -21,7 +23,8 @@ def feed_detail(request, slug, update=False, all_posts=False):
     feed = get_object_or_404(Feed, slug=slug)
     feed_status = False
 
-    if update:
+    delta = datetime.now() - feed.last_checked
+    if update or delta.seconds / 60 > getattr(settings, 'FEED_UPDATE_TIME', 15):
         populate_feed(feed)
         return HttpResponseRedirect(reverse('feed_detail', args=[slug]))
     if not all_posts:
