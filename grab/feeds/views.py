@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from datetime import datetime
 from django.core import serializers
+import beanstalkc
 
 @rendered
 def feed_list(request, all_posts=False):
@@ -26,8 +27,10 @@ def feed_detail(request, slug, update=False, all_posts=False):
 
     delta = datetime.now() - feed.last_checked
     if update or delta.seconds / 60 > getattr(settings, 'FEED_UPDATE_TIME', 15):
-        new_posts = list(populate_feed(feed))
-        return HttpResponseRedirect(reverse('feed_detail', args=[slug]))
+        beanstalk = beanstalkc.Connection()
+        beanstalk.put(str(slug))
+    #     new_posts = list(populate_feed(feed))
+    #     return HttpResponseRedirect(reverse('feed_detail', args=[slug]))
     if not all_posts:
         posts = Post.objects.unread().filter(feed=feed.id)
     else:
