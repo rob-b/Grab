@@ -1,16 +1,14 @@
 from hostel.decorators import rendered
 from feeds.models import Feed, Post
-from feeds.tools import populate_feed
 from feeds.forms import FeedForm, ReadForm
 
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.http import require_POST
-from django.core.urlresolvers import reverse
 from django.conf import settings
 from datetime import datetime
 from django.core import serializers
-import beanstalkc
+from pulse import queue
 
 @rendered
 def feed_list(request, all_posts=False):
@@ -27,10 +25,7 @@ def feed_detail(request, slug, update=False, all_posts=False):
 
     delta = datetime.now() - feed.last_checked
     if update or delta.seconds / 60 > getattr(settings, 'FEED_UPDATE_TIME', 15):
-        beanstalk = beanstalkc.Connection()
-        beanstalk.put(str(slug))
-    #     new_posts = list(populate_feed(feed))
-    #     return HttpResponseRedirect(reverse('feed_detail', args=[slug]))
+        queue.add(slug)
     if not all_posts:
         posts = Post.objects.unread().filter(feed=feed.id)
     else:
@@ -81,5 +76,4 @@ def new_items_check(request, slug):
     posts = Feed.objects.get(slug=slug).post_set.all()[:5]
     data = serializers.serialize('json', posts)
     return HttpResponse(data)
-
 
