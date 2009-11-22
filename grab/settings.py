@@ -74,6 +74,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'pulse.middleware.QueueMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
@@ -99,6 +100,7 @@ INSTALLED_APPS = (
     'south',
     'typogrify',
     'haystack',
+    'pulse',
 )
 
 CACHE_BACKEND = 'dummy:///'
