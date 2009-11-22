@@ -110,6 +110,7 @@ html, body {
   margin-right: 10px;
   overflow-y: scroll;
   height: 80%;
+  position: relative;
 }
 #content > ul a { text-decoration: none; }
 #content > ul li {
@@ -170,6 +171,11 @@ html, body {
 label {
   float: left;
   width: 100px;
+}
+.notification {
+  background: #222222;
+  color: #ffffff;
+  width: 100%;
 }
 .clearfix:after {
   clear: both;
