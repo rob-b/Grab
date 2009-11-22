@@ -41,6 +41,10 @@
             {{ post.get_content|safe|typogrify }}
             </div>
         </li>
+        {% empty %}
+        <li>
+            <h3>{% trans 'Nothing to be found' %}</h3>
+        </li>
         {% endfor %}
     </ul>
 
