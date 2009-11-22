@@ -53,6 +53,9 @@ def populate_feed(feed_obj):
         item.entries.reverse()
         for entry in item.entries:
             post = create_post(entry, feed_obj)
+            if post is None:
+                continue
+            yield post
     finally:
         storage.close()
 
@@ -67,8 +70,8 @@ def create_post(entry, feed):
         post, created = Post.objects.get_or_create(**kwargs)
     # for reasons i do not understand this may sometimes raise an integrityerror
     except IntegrityError:
-        return None
-    return post
+        created = False
+    return post if created else None
 
 def import_filter(filter):
     components = filter.split('.')

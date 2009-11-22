@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from datetime import datetime
+from django.core import serializers
 
 @rendered
 def feed_list(request, all_posts=False):
@@ -25,7 +26,7 @@ def feed_detail(request, slug, update=False, all_posts=False):
 
     delta = datetime.now() - feed.last_checked
     if update or delta.seconds / 60 > getattr(settings, 'FEED_UPDATE_TIME', 15):
-        populate_feed(feed)
+        new_posts = list(populate_feed(feed))
         return HttpResponseRedirect(reverse('feed_detail', args=[slug]))
     if not all_posts:
         posts = Post.objects.unread().filter(feed=feed.id)
@@ -51,7 +52,6 @@ def feed_add(request):
         form = FeedForm()
     return 'feeds/feed_add.html', {'form': form}
 
-@rendered
 @require_POST
 def post_read(request, object_id, read=True):
     dest = request.META.get('HTTP_REFERER')
@@ -67,3 +67,16 @@ def post_read(request, object_id, read=True):
 
 def post_unread(request, object_id):
     return post_read(request, object_id, False)
+
+@require_POST
+def new_items_check(request, slug):
+    # try:
+    #     feed = Feed.objects.get(slug=slug)
+    # except feed.DoesNotExist:
+    #     assert False, 'What should i do?'
+    # posts = populate_feed(feed)
+    posts = Feed.objects.get(slug=slug).post_set.all()[:5]
+    data = serializers.serialize('json', posts)
+    return HttpResponse(data)
+
+

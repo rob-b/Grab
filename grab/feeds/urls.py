@@ -38,6 +38,10 @@ urlpatterns += patterns('feeds.views',
      'feed_detail',
      {'update':True}),
 
+    url(r'(?P<slug>[-\w]+)/check/$',
+        'new_items_check',
+        name="feed_new_items_check"),
+
 )
 urlpatterns += patterns('',
     # edit a feed

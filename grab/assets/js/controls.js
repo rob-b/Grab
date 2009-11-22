@@ -3,6 +3,7 @@ $(document).ready(function(){
     search_form.init();
     item_action.init();
     img_size.init();
+    new_item_check.init();
 
     $('form.mark-as-read').ajaxForm();
     $('#scrollable').scrollable({
@@ -101,4 +102,32 @@ var img_size = {
             console.log(im.attr('width')+' '+im.attr('src'));
         })
     }
+}
+
+var notify = function(text){
+    var elem = $('<div></div');
+    elem.text(text);
+    elem.css({position: 'absolute'});
+    elem.addClass('notification');
+    elem.hide();
+    $('#content').prepend(elem);
+    elem.fadeIn(1500);
+    console.log(elem);
+}
+
+var new_item_check = {
+    init: function(){
+        var url = window.location;
+        if (url.pathname == '/'){
+            return;
+        }
+        $.post(url+'check/', {}, function(data){
+            if(data.length){
+                notify(data.length+' new items');
+            }
+            for (var i=0; i < data.length; i++) {
+                // console.log(data[i]);
+            }
+        }, "json");
+    },
 }
