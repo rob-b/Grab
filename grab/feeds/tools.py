@@ -51,11 +51,13 @@ def populate_feed(feed_obj):
         # reversal means that the entries will still be stored in something
         # resembling their actual publication order
         item.entries.reverse()
+        posts = []
         for entry in item.entries:
             post = create_post(entry, feed_obj)
             if post is None:
                 continue
-            yield post
+            posts.append(post)
+        return posts
     finally:
         storage.close()
 
