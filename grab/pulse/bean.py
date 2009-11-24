@@ -3,6 +3,11 @@
 import beanstalkc
 import daemon
 from django.core.management import setup_environ
+
+import os
+import sys
+project_dir = os.path.dirname(os.path.abspath(os.path.basename(__file__)))
+sys.path.append(project_dir)
 import settings
 setup_environ(settings)
 from feeds.tools import populate_feed
