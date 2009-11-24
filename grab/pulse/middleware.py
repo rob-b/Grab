@@ -1,4 +1,9 @@
+from pulse.views import queue_error
+from pulse.exceptions import PulseError
+
 class QueueMiddleware(object):
 
     def process_exception(self, request, exception):
-        assert False, exception.args
+        if isinstance(exception, PulseError):
+            return queue_error(request, exception)
+        return None
