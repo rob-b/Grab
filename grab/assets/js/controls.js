@@ -112,7 +112,6 @@ var notify = function(text){
     elem.hide();
     $('#content').prepend(elem);
     elem.fadeIn(1500);
-    console.log(elem);
 }
 
 var new_item_check = {
@@ -125,9 +124,13 @@ var new_item_check = {
             if(data.length){
                 notify(data.length+' new items');
             }
-            for (var i=0; i < data.length; i++) {
-                // console.log(data[i]);
-            }
+
+            var post_list = $('#content > ul');
+            var html = '';
+            $.each(data, function(count, item){
+                html += '<li><div class="item-head clearfix"><div class="clearfix meta"><form class="mark-as-read" method="post" action=""></form></div></div><h3>'+item.fields.title+'</h3><div>'+item.fields.summary+'</div></li>';
+            });
+            post_list.prepend(html);
         }, "json");
     },
 }
