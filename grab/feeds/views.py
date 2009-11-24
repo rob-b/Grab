@@ -1,6 +1,7 @@
 from hostel.decorators import rendered
 from feeds.models import Feed, Post
 from feeds.forms import FeedForm, ReadForm
+from feeds.tools import populate_feed
 
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
@@ -25,7 +26,8 @@ def feed_detail(request, slug, update=False, all_posts=False):
 
     delta = datetime.now() - feed.last_checked
     if update or delta.seconds / 60 > getattr(settings, 'FEED_UPDATE_TIME', 15):
-        queue.add(slug)
+        # queue.add(slug)
+        pass
     if not all_posts:
         posts = Post.objects.unread().filter(feed=feed.id)
     else:
@@ -68,12 +70,16 @@ def post_unread(request, object_id):
 
 @require_POST
 def new_items_check(request, slug):
-    # try:
-    #     feed = Feed.objects.get(slug=slug)
-    # except feed.DoesNotExist:
-    #     assert False, 'What should i do?'
-    # posts = populate_feed(feed)
-    posts = Feed.objects.get(slug=slug).post_set.all()[:5]
+    try:
+        feed = Feed.objects.get(slug=slug)
+    except feed.DoesNotExist:
+        assert False, 'What should i do?'
+    delta = datetime.now() - feed.last_checked
+    if delta.seconds / 60 > getattr(settings, 'FEED_UPDATE_TIME', 15):
+        posts = populate_feed(feed)
+    else:
+        posts = Post.objects.none()
+    # posts = feed.post_set.all()[:5]
     data = serializers.serialize('json', posts)
     return HttpResponse(data)
 
